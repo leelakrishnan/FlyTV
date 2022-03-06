@@ -12,12 +12,14 @@ export const CHAIN_CONFIG = {
   } as CustomChainConfig,
   polygon: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    rpcTarget: "https://polygon-rpc.com",
-    blockExplorer: "https://polygonscan.com/",
-    chainId: "0x89",
-    displayName: "Polygon Mainnet",
+    rpcTarget:
+        "https://polygon-mumbai.infura.io/v3/7c0e52f11cb8492c94804f28d8a0ee7f",
+    blockExplorer: "https://mumbai-explorer.matic.today",
+    chainId: "0x13881",
+    displayName: "Polygon Mumbai Testnet",
     ticker: "matic",
-    tickerName: "Matic",
+    tickerName: "matic",
+
   } as CustomChainConfig,
 } as const;
 
