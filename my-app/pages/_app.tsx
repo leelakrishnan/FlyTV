@@ -9,8 +9,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [web3AuthNetwork] = useState<WEB3AUTH_NETWORK_TYPE>("mainnet");
-    const [chain] = useState<CHAIN_CONFIG_TYPE>("mainnet");
+    const [web3AuthNetwork] = useState<WEB3AUTH_NETWORK_TYPE>("testnet");
+    const [chain] = useState<CHAIN_CONFIG_TYPE>("polygon");
 
     return (
             <Web3AuthProvider chain={chain} web3AuthNetwork={web3AuthNetwork}>
