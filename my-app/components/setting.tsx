@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 import {useWeb3Auth, Web3AuthContext} from "../services/web3auth";
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Head from "next/head";
 
 interface IProps {
   setNetwork: (network: WEB3AUTH_NETWORK_TYPE) => void;
@@ -12,8 +13,6 @@ interface IProps {
 }
 
 const Setting = ({ setNetwork, setChain }: IProps) => {
-    const router = useRouter()
-
     const { provider, login } = useWeb3Auth();
 
   const loggedInView = (
@@ -22,9 +21,28 @@ const Setting = ({ setNetwork, setChain }: IProps) => {
   );
 
   const unloggedInView = (
-      <button onClick={login} className={styles.card}>
-        Login
-      </button>
+      <>
+      <Head>
+          <title>Fly TV</title>
+          <meta
+              name="description"
+              content="Home for hackathon"
+          />
+      </Head>
+          <main>
+              <div className={styles.hero}>
+                  <div className={styles.header}>
+                      <h1> FlyTV</h1>
+                      <p className={styles.about}>
+                          Home for Hackathon.
+                      </p>
+                  </div>
+                  <button onClick={login} className={styles.join}>
+                      Login
+                  </button>
+              </div>
+          </main>
+      </>
   );
 
   return <div className={styles.grid}>{provider ? loggedInView : unloggedInView}</div>;

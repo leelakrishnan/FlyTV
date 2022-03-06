@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/FlyV.iml" filepath="$PROJECT_DIR$/.idea/FlyV.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/FlyTV.iml" filepath="$PROJECT_DIR$/.idea/FlyTV.iml" />
     </modules>
   </component>
 </project>
