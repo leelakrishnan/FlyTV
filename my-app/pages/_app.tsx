@@ -9,12 +9,12 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [web3AuthNetwork, setWeb3AuthNetwork] = useState<WEB3AUTH_NETWORK_TYPE>("mainnet");
-    const [chain, setChain] = useState<CHAIN_CONFIG_TYPE>("mainnet");
+    const [web3AuthNetwork] = useState<WEB3AUTH_NETWORK_TYPE>("mainnet");
+    const [chain] = useState<CHAIN_CONFIG_TYPE>("mainnet");
 
     return (
             <Web3AuthProvider chain={chain} web3AuthNetwork={web3AuthNetwork}>
-                <Setting setNetwork={setWeb3AuthNetwork} setChain={setChain}/>
+                <Setting />
                 <ToastContainer />
                 {/*  WRAP THE WHOLE APP TO PROVIDE STATE*/}
                 <Component {...pageProps} />

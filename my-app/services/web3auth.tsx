@@ -5,7 +5,12 @@ import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from "../config/chainConfig";
 import { WEB3AUTH_NETWORK_TYPE } from "../config/web3AuthNetwork";
 import { getWalletProvider, IWalletProvider } from "./walletProvider";
 import { useRouter } from 'next/router'
-import Web3 from "web3";
+
+let web3AuthClientId = 'BHfhRJH5ux8RTcpt_MH50VHL9ye242ruQXZUxyYkleHiyZzHXPi_YToJXkOeMeGn7g_Nc503DfTrWGMlwi-s2YM';
+
+if (process.env.WEB3AUTH_CLIENT_ID) {
+    web3AuthClientId = process.env.WEB3AUTH_CLIENT_ID;
+}
 
 export interface IWeb3AuthContext {
     web3Auth: Web3Auth | null;
@@ -48,6 +53,8 @@ interface IWeb3AuthProps {
 }
 
 export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, web3AuthNetwork, chain }: IWeb3AuthProps) => {
+
+
     const [web3Auth, setWeb3Auth] = useState<Web3Auth | null>(null);
     const [provider, setProvider] = useState<IWalletProvider | null>(null);
     const [user, setUser] = useState<unknown | null>(null);
@@ -57,28 +64,9 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
         (web3authProvider: SafeEventEmitterProvider) => {
             const walletProvider = getWalletProvider(chain, web3authProvider, uiConsole);
             setProvider(walletProvider);
-            newGetAccount(walletProvider).then(
-                (message) => {
-                    debugger;
-                }
-            )
-            debugger
         },
         [chain]
     );
-
-    async function newGetAccount(walletProvider: any) {
-        try {
-            const web3 = new Web3(walletProvider as any);
-            const accounts = await web3.eth.getAccounts();
-            uiConsole("Eth accounts", accounts);
-            debugger;
-            return accounts;
-        } catch (error) {
-            console.error("Error", error);
-            uiConsole("error", error);
-        }
-    };
 
     useEffect(() => {
         const subscribeAuthEvents = (web3auth: Web3Auth) => {
@@ -107,27 +95,16 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
 
         const currentChainConfig = CHAIN_CONFIG[chain];
 
-        async function newGetAccount() {
-            try {
-                const web3 = new Web3(provider as any);
-                const accounts = await web3.eth.getAccounts();
-                uiConsole("Eth accounts", accounts);
-                return accounts;
-            } catch (error) {
-                console.error("Error", error);
-                uiConsole("error", error);
-            }
-        };
 
         async function init() {
             try {
                 const { Web3Auth } = await import("@web3auth/web3auth");
                 const { OpenloginAdapter } = await import("@web3auth/openlogin-adapter");
-                const clientId = "BKPxkCtfC9gZ5dj-eg-W6yb5Xfr3XkxHuGZl2o2Bn8gKQ7UYike9Dh6c-_LaXlUN77x0cBoPwcSx-IVm0llVsLA";
+                debugger;
+                const clientId = web3AuthClientId;
                 setIsLoading(true);
                 const web3AuthInstance = new Web3Auth({
                     chainConfig: currentChainConfig,
-                    // get your client id from https://dashboard.web3auth.io
                     clientId,
                 });
 
@@ -178,12 +155,14 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
     };
 
     const getAccounts = async () => {
+        debugger;
         if (!provider) {
             console.log("provider not initialized yet");
             uiConsole("provider not initialized yet");
             return;
         }
         const accounts = await provider.getAccounts();
+        debugger;
         return accounts;
     };
 

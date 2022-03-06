@@ -1,6 +1,6 @@
 import { useWeb3Auth } from "../services/web3auth";
 import styles from "../styles/Home.module.css";
-import React, {useEffect, useState} from "react";
+import  {useEffect, useState} from "react";
 import Loader from "./Loader";
 
 const Main = () => {
@@ -9,15 +9,13 @@ const Main = () => {
     const [loadingState, setLoadingState] = useState("not-loaded");
 
     useEffect(() => {
-        debugger;
         if (provider) {
             setIsLoggedIn(true);
         }
         setLoadingState('loaded');
-    }, []);
+    }, [provider]);
 
     function localgetUserInfo() {
-        debugger;
         getUserInfo();
     }
 

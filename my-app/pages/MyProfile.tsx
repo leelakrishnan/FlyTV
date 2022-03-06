@@ -1,9 +1,6 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Nav from '../components/Nav';
-import { toast } from 'react-toastify';
 import type { NextPage } from 'next';
 
 const MyProfile: NextPage = () => {
