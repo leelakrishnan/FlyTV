@@ -33,11 +33,13 @@ const Nav = () => {
     }
 
     function moralisAuthenticate() {
-        authenticate().then(
-            (result) => {
-               console.log(JSON.stringify(result));
-            }
-        )
+        if (!isAuthenticated) {
+            authenticate().then(
+                (result) => {
+                    console.log(JSON.stringify(result));
+                }
+            )
+        }
     }
 
     function copy() {
@@ -48,8 +50,11 @@ const Nav = () => {
 
     return (
         <nav>
-            <Link href="/" passHref>
+            <Link href="/MyProfile" passHref>
                 <a className={styles.logo}>My Profile</a>
+            </Link>
+            <Link href="/MyTeam" passHref>
+                <a className={styles.logo}>MyTeam</a>
             </Link>
             <div className={styles.rightNav}>
                 {loadingState == 'loaded' && walletAddress != 'not-set' &&

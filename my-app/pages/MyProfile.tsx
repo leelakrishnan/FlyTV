@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
 import Nav from '../components/Nav';
 import type { NextPage } from 'next';
 import Profile from "../components/Profile";
@@ -7,7 +6,6 @@ import {useMoralis} from "react-moralis";
 
 const MyProfile: NextPage = () => {
     const {user} = useMoralis();
-
     return (
         <>
             <Head>
@@ -17,7 +15,6 @@ const MyProfile: NextPage = () => {
                     content="Home for hackathon"
                 />
             </Head>
-
             <main>
                 <Nav/>
                 {user &&
