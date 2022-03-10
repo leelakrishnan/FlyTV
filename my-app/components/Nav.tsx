@@ -4,10 +4,12 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import { toast } from 'react-toastify';
+import { useMoralis } from "react-moralis";
 
 const Nav = () => {
+    const {authenticate, user, isAuthenticated, logout} = useMoralis();
     const [loadingState, setLoadingState] = useState("not-loaded");
-    const {provider,logout, getAccounts} = useWeb3Auth();
+    const {provider,logoutWeb3Auth, getAccounts} = useWeb3Auth();
     const [walletAddress, setWalletAddress] = useState("not-set");
 
     useEffect(() => {
@@ -19,9 +21,24 @@ const Nav = () => {
                     }
                 }
             )
+            moralisAuthenticate();
         }
         setLoadingState('loaded');
     }, []);
+
+    function logoutFlyTV() {
+        logoutWeb3Auth();
+        if (isAuthenticated)
+            logout();
+    }
+
+    function moralisAuthenticate() {
+        authenticate().then(
+            (result) => {
+               console.log(JSON.stringify(result));
+            }
+        )
+    }
 
     function copy() {
         toast.success(walletAddress +  " copied to clipboard!", {
@@ -35,7 +52,6 @@ const Nav = () => {
                 <a className={styles.logo}>My Profile</a>
             </Link>
             <div className={styles.rightNav}>
-
                 {loadingState == 'loaded' && walletAddress != 'not-set' &&
                     <CopyToClipboard text={walletAddress}>
                         <button className={styles.connect} onClick={copy}>
@@ -44,7 +60,7 @@ const Nav = () => {
                     </CopyToClipboard>
                 }
                 {loadingState == 'loaded' &&
-                    <button className={styles.logout} onClick={logout}>
+                    <button className={styles.logout} onClick={logoutFlyTV}>
                         <span>Log Out</span>
                     </button>
                 }
