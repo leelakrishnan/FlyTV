@@ -3,6 +3,7 @@ import {useMoralis} from "react-moralis";
 import { toast } from 'react-toastify';
 import { MultiSelect } from "react-multi-select-component";
 import styles from "../styles/Form.module.css";
+import { useRouter } from 'next/router'
 
 const options = [
   { label: "HTML/CSS", value: "HTML/CSS" },
@@ -16,16 +17,15 @@ const options = [
   { label: "PHP", value: "PHP" },
   { label: "NextJS", value: "NextJS" },
   { label: "React", value: "React" },
-  { label: "Morallis", value: "Morallis" },
+  { label: "Moralis", value: "Moralis" },
   { label: "Web3Knowledge", value: "Web3Knowledge" },
   { label: "Solidity", value: "Solidity" },
 ];
 
-
 const Profile = () => {
+  const router = useRouter();
   const [selectedSkill, setSelectedSkill] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("");
-
   const [formValues, setFormValues] = useState({
     userName: "",
     email: "",
@@ -44,7 +44,6 @@ const Profile = () => {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
-
   const postTitle = {
     textAlign: "center",
     fontSize: "2rem",
@@ -130,6 +129,11 @@ const Profile = () => {
     return errors;
   };
 
+  const handleCancel = async (e) => {
+    e.preventDefault();
+    router.push('/Team');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("HERE");
@@ -162,6 +166,7 @@ const Profile = () => {
     toast.success(" Profile Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
+    router.push('/Team');
     setLoading(false);
   };
 
@@ -330,12 +335,12 @@ const Profile = () => {
             <div className={styles.formGroups}>
               <label htmlFor="name">Skills</label>
               <div>
-              <MultiSelect className="dark"
-                           options={options}
-                           value={selectedSkill}
-                           onChange={setSelectedSkill}
-                           labelledBy="Select"
-              />
+                <MultiSelect className="dark"
+                             options={options}
+                             value={selectedSkill}
+                             onChange={setSelectedSkill}
+                             labelledBy="Select"
+                />
               </div>
             </div>
             <div className={styles.formGroups}>
@@ -356,6 +361,9 @@ const Profile = () => {
                 <div className={styles.formGroups}>
                   <button onClick={handleSubmit} className={styles.submit}>
                     Submit
+                  </button>
+                  <button onClick={handleCancel} className={styles.submit}>
+                    Cancel
                   </button>
                 </div>
             ) : (
