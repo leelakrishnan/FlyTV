@@ -4,7 +4,7 @@ import  {useEffect, useState} from "react";
 import Loader from "./Loader";
 
 const Main = () => {
-    const {provider, login, logout, getUserInfo, getAccounts, getBalance, signMessage} = useWeb3Auth();
+    const {provider, login, logoutWeb3Auth, getUserInfo, getAccounts, getBalance, signMessage} = useWeb3Auth();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadingState, setLoadingState] = useState("not-loaded");
 
@@ -33,7 +33,7 @@ const Main = () => {
             <button onClick={signMessage} className={styles.card}>
                 Sign Message
             </button>
-            <button onClick={logout} className={styles.card}>
+            <button onClick={logoutWeb3Auth} className={styles.card}>
                 Log Out
             </button>
             <div className={styles.console} id="console">
