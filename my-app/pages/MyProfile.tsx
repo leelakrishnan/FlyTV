@@ -2,8 +2,12 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Nav from '../components/Nav';
 import type { NextPage } from 'next';
+import Profile from "../components/Profile";
+import {useMoralis} from "react-moralis";
 
 const MyProfile: NextPage = () => {
+    const {user} = useMoralis();
+
     return (
         <>
             <Head>
@@ -15,16 +19,10 @@ const MyProfile: NextPage = () => {
             </Head>
 
             <main>
-                <Nav />
-                <div className={styles.hero}>
-                    <div className={styles.header}>
-                        <h1> FlyTV</h1>
-                        <p className={styles.about}>
-                            Home for Hackathon.
-                        </p>
-                    </div>
-
-                </div>
+                <Nav/>
+                {user &&
+                    <Profile/>
+                }
                 {/* <Footer /> */}
             </main>
         </>

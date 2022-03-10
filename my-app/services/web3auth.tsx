@@ -6,7 +6,7 @@ import { WEB3AUTH_NETWORK_TYPE } from "../config/web3AuthNetwork";
 import { getWalletProvider, IWalletProvider } from "./walletProvider";
 import { useRouter } from 'next/router'
 
-let web3AuthClientId = 'BHfhRJH5ux8RTcpt_MH50VHL9ye242ruQXZUxyYkleHiyZzHXPi_YToJXkOeMeGn7g_Nc503DfTrWGMlwi-s2YM';
+let web3AuthClientId = '';
 
 if (process.env.WEB3AUTH_CLIENT_ID) {
     web3AuthClientId = process.env.WEB3AUTH_CLIENT_ID;
@@ -18,7 +18,7 @@ export interface IWeb3AuthContext {
     isLoading: boolean;
     user: unknown;
     login: () => Promise<void>;
-    logout: () => Promise<void>;
+    logoutWeb3Auth: () => Promise<void>;
     getUserInfo: () => Promise<any>;
     signMessage: () => Promise<any>;
     getAccounts: () => Promise<any>;
@@ -31,7 +31,7 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
     isLoading: false,
     user: null,
     login: async () => {},
-    logout: async () => {},
+    logoutWeb3Auth: async () => {},
     getUserInfo: async () => {},
     signMessage: async () => {},
     getAccounts: async () => {},
@@ -100,7 +100,6 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
             try {
                 const { Web3Auth } = await import("@web3auth/web3auth");
                 const { OpenloginAdapter } = await import("@web3auth/openlogin-adapter");
-                debugger;
                 const clientId = web3AuthClientId;
                 setIsLoading(true);
                 const web3AuthInstance = new Web3Auth({
@@ -132,7 +131,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
         setWalletProvider(localProvider!);
     };
 
-    const logout = async () => {
+    const logoutWeb3Auth = async () => {
         if (!web3Auth) {
             console.log("web3auth not initialized yet");
             uiConsole("web3auth not initialized yet");
@@ -155,14 +154,12 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
     };
 
     const getAccounts = async () => {
-        debugger;
         if (!provider) {
             console.log("provider not initialized yet");
             uiConsole("provider not initialized yet");
             return;
         }
         const accounts = await provider.getAccounts();
-        debugger;
         return accounts;
     };
 
@@ -197,7 +194,7 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
         user,
         isLoading,
         login,
-        logout,
+        logoutWeb3Auth,
         getUserInfo,
         getAccounts,
         getBalance,
