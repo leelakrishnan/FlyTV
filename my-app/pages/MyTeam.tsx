@@ -13,6 +13,7 @@ import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import Profile from "../components/Profile";
 import TeamMission from "../components/TeamMission";
 import TeamGithub from "../components/TeamGithub";
+import TeamGatherRoom from "../components/TeamGatherRoom";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -122,12 +123,16 @@ const MyTeam = () => {
                         >
                             <Tab label="Team Mission" {...a11yProps(0)} />
                             <Tab label="Github" {...a11yProps(1)} />
+                            <Tab label="GatherTown Space" {...a11yProps(2)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <TeamGithub teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            <TeamGatherRoom teamData={teamData}  />
                         </TabPanel>
                     </Box>
                 )}

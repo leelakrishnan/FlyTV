@@ -9,11 +9,11 @@ type Props = {
     teamData: any,
 }
 
-const TeamGithub = ({ teamData }: Props)  => {
+const TeamGatherRoom = ({ teamData }: Props)  => {
     const router = useRouter();
 
     const [formValues, setFormValues] = useState({
-        repoName: ""
+        gatherRoom: ""
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -33,10 +33,10 @@ const TeamGithub = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
-        const repoName = teamData?.get("repoName");
+        const gatherRoom = teamData?.get("gatherRoom");
 
-        if (repoName)
-            formValues.repoName = repoName;
+        if (gatherRoom)
+            formValues.gatherRoom = gatherRoom;
     }
 
     // create a function which set the values of form field
@@ -46,8 +46,8 @@ const TeamGithub = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
-        if (formValues.repoName === "") {
-            errors.repoName = "RepoName is required";
+        if (formValues.gatherRoom === "") {
+            errors.gatherRoom = "Gather Room is required";
         }
         return errors;
     };
@@ -68,11 +68,11 @@ const TeamGithub = ({ teamData }: Props)  => {
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
-        if (formValues.repoName) {
-            myTeamObj.set("repoName", formValues.repoName);
+        if (formValues.gatherRoom) {
+            myTeamObj.set("gatherRoom", formValues.gatherRoom);
         }
         myTeamObj.save();
-        toast.success(" Github Info Saved!", {
+        toast.success(" Gather Room Info Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -83,23 +83,21 @@ const TeamGithub = ({ teamData }: Props)  => {
             <div className={styles.container}>
                 {loader == "loaded" &&
                     <form className={styles.form}>
-                        <div className={styles.formGroups}>
-                            {formErrors.repoName && (
-                                <p style={formErrorStyle}>{formErrors.repoName}</p>
-                            )}
-                            <label htmlFor="name">Repository Name</label>
-                            <input
-                                type="text"
-                                value={formValues.repoName}
-                                name={Object.keys(formValues)[0]}
-                                onChange={handleOnChange}
-                                placeholder="Repository Name"
-                            />
-                        </div>
+                        {formValues.gatherRoom !== "" &&
+                            <div className={styles.formGroups}>
+                                <label htmlFor="name">Gather Town Room</label>
+                                <input
+                                    type="text"
+                                    value={formValues.gatherRoom}
+                                    name={Object.keys(formValues)[0]}
+                                    disabled={true}
+                                />
+                            </div>
+                        }
                         {!loading ? (
                             <div className={styles.formGroups}>
                                 <button onClick={handleSubmit} className={styles.submit}>
-                                    Submit
+                                    CreateGatherRoom
                                 </button>
                             </div>
                         ) : (
@@ -113,4 +111,4 @@ const TeamGithub = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamGithub;
+export default TeamGatherRoom;
