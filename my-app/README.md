@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Make sure your .env.local is set up (rename .env.local.example and paste in the correct info -- see secret channel in our discord or ask a dev -- if you've already run npm run dev, then restart that and it should work like a charm)
+
 First, run the development server:
 
 ```bash

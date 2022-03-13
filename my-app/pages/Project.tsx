@@ -1,24 +1,22 @@
 import Head from "next/head";
 import Nav from "../components/Nav";
 import type { NextPage } from "next";
-import Profile from "../components/Profile";
 import { useMoralis } from "react-moralis";
 
-const MyProfile: NextPage = () => {
+const Project: NextPage = () => {
   const { user } = useMoralis();
   return (
     <>
       <Head>
-        <title>FlyT.V.</title>
-        <meta name="description" content="Home for hackathon" />
+        <title>FLYT.V.</title>
+        <meta name="Project Checklist" content="Home for hackathon" />
       </Head>
       <main>
         <Nav />
-        {/* if user exists, show profile */}
-        {user && <Profile />}
+        {user && <Project />}
         {/* <Footer /> */}
       </main>
     </>
   );
 };
-export default MyProfile;
+export default Project;
