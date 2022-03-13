@@ -116,3 +116,8 @@
   /* outline: 1px solid slategrey; */
   border-radius: 20px;
 }
+
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  color: var(--color-theme-red);
+}
