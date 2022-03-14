@@ -2,8 +2,9 @@ import Head from "next/head";
 import Nav from "../components/Nav";
 import type { NextPage } from "next";
 import { useMoralis } from "react-moralis";
+import Project from "../components/Project";
 
-const Project: NextPage = () => {
+const ProjectMan: NextPage = () => {
   const { user } = useMoralis();
   return (
     <>
@@ -19,4 +20,4 @@ const Project: NextPage = () => {
     </>
   );
 };
-export default Project;
+export default ProjectMan;
