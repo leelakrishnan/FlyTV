@@ -104,7 +104,6 @@ const Profile = () => {
       formValues.otherInfo = otherInfo;
     if (city)
       formValues.city = city;
-    debugger;
     if (level) {
       setSelectedLevel(level);
     }
@@ -147,7 +146,6 @@ const Profile = () => {
     validateError();
     console.log("formValues", formValues);
     setLoading(true);
-    debugger;
     setUserData({
       email: formValues.email === "" ? undefined : formValues.email,
       firstName: formValues.firstName === "" ? undefined : formValues.firstName,
@@ -335,7 +333,7 @@ const Profile = () => {
             <div className={styles.formGroups}>
               <label htmlFor="name">Skills</label>
               <div>
-                <MultiSelect className="dark"
+                <MultiSelect className=""
                              options={options}
                              value={selectedSkill}
                              onChange={setSelectedSkill}

@@ -531,4 +531,16 @@
   100% {
     opacity: 0;
   }
+  0% {opacity: 1;}
+  100% {opacity: 0;} 
+}
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  color: white !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: red !important;
+}
+.rmsc.dropdown-container {
+  background-color: black !important;;
 }

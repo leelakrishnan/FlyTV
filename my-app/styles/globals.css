@@ -118,3 +118,13 @@ footer {
 .w3a-modal__header {
   color: #0e0d0d;
 }
+
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
+  color: white !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: red !important;
+}
+.rmsc.dropdown-container {
+  background-color: black !important;;
+}
