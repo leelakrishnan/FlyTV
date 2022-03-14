@@ -4,7 +4,7 @@
 :root {
   --color-theme-black: #0e0d0d;
   --color-theme-white: #f0f0f0;
-  --color-theme-red: #eeffa3;
+  --color-theme-red: #ffa3a3;
 }
 
 * {
@@ -114,7 +114,10 @@ footer {
   }
 }
 
-
+/* web3auth modal header text on login */
+.w3a-modal__header {
+  color: #0e0d0d;
+}
 
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
   color: white !important;
