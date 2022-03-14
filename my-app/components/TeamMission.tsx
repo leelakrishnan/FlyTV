@@ -13,6 +13,7 @@ const TeamMission = ({ teamData }: Props)  => {
     const router = useRouter();
 
     const [formValues, setFormValues] = useState({
+        teamName: "",
         mission: "",
         vision: ""
     });
@@ -33,9 +34,12 @@ const TeamMission = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
+        const teamName = teamData?.get("teamName");
         const vision = teamData?.get("vision");
         const mission = teamData?.get("mission");
 
+        if (teamName)
+            formValues.teamName = teamName;
         if (vision)
             formValues.vision = vision;
         if (mission)
@@ -50,6 +54,9 @@ const TeamMission = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
+        if (formValues.teamName === "") {
+            errors.teamName = "Team Name is required";
+        }
         if (formValues.vision === "") {
             errors.vision = "Vision is required";
         }
@@ -75,6 +82,9 @@ const TeamMission = ({ teamData }: Props)  => {
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
+        if (formValues.teamName) {
+            myTeamObj.set("teamName", formValues.teamName);
+        }
         if (formValues.mission) {
             myTeamObj.set("mission", formValues.mission);
         }
@@ -82,7 +92,7 @@ const TeamMission = ({ teamData }: Props)  => {
             myTeamObj.set("vision", formValues.vision);
         }
         myTeamObj.save();
-        toast.success(" Team Mission Saved!", {
+        toast.success(" Team Info is Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -94,6 +104,19 @@ const TeamMission = ({ teamData }: Props)  => {
                 {loader == "loaded" &&
                     <form className={styles.form}>
                         <div className={styles.formGroups}>
+                            {formErrors.teamName && (
+                                <p style={formErrorStyle}>{formErrors.teamName}</p>
+                            )}
+                            <label htmlFor="name">TeamName</label>
+                            <input
+                                type="text"
+                                value={formValues.teamName}
+                                name={Object.keys(formValues)[0]}
+                                onChange={handleOnChange}
+                                placeholder="TeamName"
+                            />
+                        </div>
+                        <div className={styles.formGroups}>
                             {formErrors.mission && (
                                 <p style={formErrorStyle}>{formErrors.mission}</p>
                             )}
@@ -101,7 +124,7 @@ const TeamMission = ({ teamData }: Props)  => {
                             <input
                                 type="text"
                                 value={formValues.mission}
-                                name={Object.keys(formValues)[0]}
+                                name={Object.keys(formValues)[1]}
                                 onChange={handleOnChange}
                                 placeholder="Mission"
                             />
@@ -114,7 +137,7 @@ const TeamMission = ({ teamData }: Props)  => {
                             <input
                                 type="text"
                                 value={formValues.vision}
-                                name={Object.keys(formValues)[1]}
+                                name={Object.keys(formValues)[2]}
                                 onChange={handleOnChange}
                                 placeholder="Vision"
                             />

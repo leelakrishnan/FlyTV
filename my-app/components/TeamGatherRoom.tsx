@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Moralis from "moralis";
+import axios from 'axios';
 
 type Props = {
     teamData: any,
@@ -19,6 +20,7 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
     const [loading, setLoading] = useState(false);
     const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
     const [loader, setLoader] = useState("not-loaded");
+    const [gatherLink, setGatherLink] = useState("");
 
     useEffect(() => {
         mapMoralisTeamToFormValues();
@@ -34,9 +36,9 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
 
     function mapMoralisTeamToFormValues() {
         const gatherRoom = teamData?.get("gatherRoom");
-
-        if (gatherRoom)
-            formValues.gatherRoom = gatherRoom;
+        if (gatherRoom) {
+            setGatherLink("https://app.gather.town/app/" + gatherRoom);
+        }
     }
 
     // create a function which set the values of form field
@@ -52,10 +54,47 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
         return errors;
     };
 
+    async function makeGatherApiCall(roomName: string) {
+        axios
+            .post('https://4lbyt5w5m7.execute-api.us-east-1.amazonaws.com/test/v1/createRoom', {
+                name: roomName
+            })
+            .then(response => {
+                debugger;
+                if (response && response.data) {
+                    const myTeam = Moralis.Object.extend("Team");
+                    const myTeamObj = new myTeam();
+                    myTeamObj.set("id", teamData.id);
+                    myTeamObj.set("gatherRoom", response.data);
+                    myTeamObj.save();
+
+                    setGatherLink("https://app.gather.town/app/" + response.data);
+
+                    toast.success(" GatherTown Room created!", {
+                        position: toast.POSITION.BOTTOM_CENTER,
+                    });
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                console.log(error);
+                setLoading(false);
+            });
+    }
+
+    async function createRoomInGatherTown(roomName: string) {
+        try {
+            console.log(roomName);
+            return await makeGatherApiCall(roomName);
+        } catch (error) {
+            console.log(error);
+            return "";
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("HERE");
-
         // check form values are not empty
         const errors = validateError();
         if (Object.keys(errors).length > 0) {
@@ -64,18 +103,11 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
         }
         validateError();
         console.log("formValues", formValues);
-        setLoading(true);
-        const myTeam = Moralis.Object.extend("Team");
-        const myTeamObj = new myTeam();
-        myTeamObj.set("id", teamData.id);
         if (formValues.gatherRoom) {
-            myTeamObj.set("gatherRoom", formValues.gatherRoom);
+            setLoading(true);
+            const noSpecialCharactersGatherRoom = formValues.gatherRoom.replace(/[^a-zA-Z0-9 ]/g, '');
+            await makeGatherApiCall(noSpecialCharactersGatherRoom);
         }
-        myTeamObj.save();
-        toast.success(" Gather Room Info Saved!", {
-            position: toast.POSITION.BOTTOM_CENTER,
-        });
-        setLoading(false);
     };
 
     return (
@@ -83,28 +115,34 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
             <div className={styles.container}>
                 {loader == "loaded" &&
                     <form className={styles.form}>
-                        {formValues.gatherRoom !== "" &&
-                            <div className={styles.formGroups}>
-                                <label htmlFor="name">Gather Town Room</label>
-                                <input
-                                    type="text"
-                                    value={formValues.gatherRoom}
-                                    name={Object.keys(formValues)[0]}
-                                    disabled={true}
-                                />
-                            </div>
-                        }
-                        {!loading ? (
-                            <div className={styles.formGroups}>
-                                <button onClick={handleSubmit} className={styles.submit}>
-                                    CreateGatherRoom
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="loader-center">
-                                <div className="loader"></div>
-                            </div>
-                        )}
+                        <div className={styles.formGroups}>
+                            {formErrors.gatherRoom && (
+                                <p style={formErrorStyle}>{formErrors.gatherRoom}</p>
+                            )}
+                            <input
+                                type="text"
+                                value={gatherLink}
+                                disabled={true}
+                            />
+                        </div>
+                        <div className={styles.formGroups}>
+                            {formErrors.gatherRoom && (
+                                <p style={formErrorStyle}>{formErrors.gatherRoom}</p>
+                            )}
+                            <label htmlFor="name">Gather Town Room Name</label>
+                            <input
+                                type="text"
+                                value={formValues.gatherRoom}
+                                name={Object.keys(formValues)[0]}
+                                onChange={handleOnChange}
+                                placeholder="Gather Town Room Name"
+                            />
+                        </div>
+                        <div className={styles.formGroups}>
+                            <button onClick={handleSubmit} className={styles.submit}>
+                                Create/Update Gather Room
+                            </button>
+                        </div>
                     </form>
                 }
             </div>

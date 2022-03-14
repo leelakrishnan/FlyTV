@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import {useEffect, useState} from "react";
 import Nav from "../components/Nav";
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import {useMoralis} from "react-moralis";
 import Moralis from "moralis";
 import Loader from "../components/Loader";
@@ -14,6 +13,9 @@ import Profile from "../components/Profile";
 import TeamMission from "../components/TeamMission";
 import TeamGithub from "../components/TeamGithub";
 import TeamGatherRoom from "../components/TeamGatherRoom";
+import TeamAcceptRejectInvitees from "../components/TeamAcceptRejectInvitees";
+import TeamVideoDrive from "../components/TeamVideoDrive";
+import styles from '../styles/Home.module.css'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -69,8 +71,7 @@ const MyTeam = () => {
                             debugger;
                         });
                 }
-
-                await getTeamForUser("NUvcIkTFL8shCKYa2vbxtLmJ");
+                await getTeamForUser(user.id);
                 setLoading("loaded");
             }
         })();
@@ -121,9 +122,11 @@ const MyTeam = () => {
                             onChange={handleChange}
                             aria-label="My Team"
                         >
-                            <Tab label="Team Mission" {...a11yProps(0)} />
+                            <Tab label="Team Info" {...a11yProps(0)} />
                             <Tab label="Github" {...a11yProps(1)} />
                             <Tab label="GatherTown Space" {...a11yProps(2)} />
+                            <Tab label="Accept Reject Invitees" {...a11yProps(3)} />
+                            <Tab label="Video Drive" {...a11yProps(4)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
@@ -133,6 +136,12 @@ const MyTeam = () => {
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <TeamGatherRoom teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={3}>
+                            <TeamAcceptRejectInvitees teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={4}>
+                            <TeamVideoDrive teamData={teamData}  />
                         </TabPanel>
                     </Box>
                 )}
