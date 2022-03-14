@@ -529,3 +529,18 @@
   0% {opacity: 1;}
   100% {opacity: 0;} 
 } 
+/* EVN added  03-13-2002 */
+
+
+#navrow{
+  width:50%;
+  }
+
+  .logo{font-size:1.3rem;} 
+  @media only screen and (max-width: 600px) {
+    .logo{font-size:.5rem;}
+  }
+  @media only screen and (max-width: 800px) {
+    .logo{font-size:.8rem;}
+  }
+  /* end for nav */

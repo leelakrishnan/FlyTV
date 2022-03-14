@@ -52,10 +52,13 @@ const Nav = () => {
         <nav>
             <Link href="/MyProfile" passHref>
                 <a className={styles.logo}>My Profile</a>
-            </Link>
+            </Link><br />
             <Link href="/MyTeam" passHref>
                 <a className={styles.logo}>MyTeam</a>
-            </Link>
+            </Link><br /><br />
+            <Link href="/TeamCreate" passHref>
+                <a className={styles.logo}>TeamCreate</a>
+            </Link><br /><br />
             <div className={styles.rightNav}>
                 {loadingState == 'loaded' && walletAddress != 'not-set' &&
                     <CopyToClipboard text={walletAddress}>
