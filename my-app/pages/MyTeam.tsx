@@ -16,6 +16,8 @@ import TeamGatherRoom from "../components/TeamGatherRoom";
 import TeamAcceptRejectInvitees from "../components/TeamAcceptRejectInvitees";
 import TeamVideoDrive from "../components/TeamVideoDrive";
 import styles from '../styles/Home.module.css'
+import TeamMultiSigWallet from "../components/TeamMultiSigWallet";
+import TeamProjectManagement from "../components/TeamProjectManagement";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -127,6 +129,8 @@ const MyTeam = () => {
                             <Tab label="GatherTown Space" {...a11yProps(2)} />
                             <Tab label="Accept Reject Invitees" {...a11yProps(3)} />
                             <Tab label="Video Drive" {...a11yProps(4)} />
+                            <Tab label="Multi Sig Wallet" {...a11yProps(5)} />
+                            <Tab label="Project Management" {...a11yProps(6)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
@@ -142,6 +146,12 @@ const MyTeam = () => {
                         </TabPanel>
                         <TabPanel value={value} index={4}>
                             <TeamVideoDrive teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={5}>
+                            <TeamMultiSigWallet teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={6}>
+                            <TeamProjectManagement teamData={teamData}  />
                         </TabPanel>
                     </Box>
                 )}
