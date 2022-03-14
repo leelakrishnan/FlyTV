@@ -5,10 +5,12 @@ import {useEffect, useState} from "react";
 import styles from "../styles/Home.module.css";
 import Nav from "../components/Nav";
 import { toast } from "react-toastify";
+import {useMoralis} from "react-moralis";
 
 const Team: NextPage = () => {
     const router = useRouter();
     const [selectedOption, setSelectedOption] = useState("");
+    const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
 
     useEffect(() => {
     }, []);
