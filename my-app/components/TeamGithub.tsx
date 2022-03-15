@@ -65,6 +65,7 @@ const TeamGithub = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
+        incrementBadge();
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
@@ -77,6 +78,17 @@ const TeamGithub = ({ teamData }: Props)  => {
         });
         setLoading(false);
     };
+
+    function incrementBadge() {
+        debugger;
+        const repoName = teamData?.get("repoName");
+        if (repoName) {
+        } else {
+            // @ts-ignore
+            user.increment("badges");
+            user.save();
+        }
+    }
 
     return (
         <>

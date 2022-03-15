@@ -51,6 +51,17 @@ const TeamProjectManagement = ({ teamData }: Props)  => {
         return errors;
     };
 
+    function incrementBadge() {
+        debugger;
+        const projectManagementUrl = teamData?.get("projectManagementUrl");
+        if (projectManagementUrl) {
+        } else {
+            // @ts-ignore
+            user.increment("badges");
+            user.save();
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("HERE");
@@ -64,6 +75,7 @@ const TeamProjectManagement = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
+        incrementBadge();
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);

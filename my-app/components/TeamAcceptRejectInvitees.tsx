@@ -82,7 +82,7 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
                     <form className={styles.form}>
                         {formValues.gatherRoom !== "" &&
                             <div className={styles.formGroups}>
-                                <label htmlFor="name">Gather Town Room</label>
+                                <label htmlFor="name">Accept Reject Invitees</label>
                                 <input
                                     type="text"
                                     value={formValues.gatherRoom}

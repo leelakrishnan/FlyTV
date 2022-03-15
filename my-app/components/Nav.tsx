@@ -11,6 +11,7 @@ const Nav = () => {
   const [loadingState, setLoadingState] = useState("not-loaded");
   const { provider, logoutWeb3Auth, getAccounts } = useWeb3Auth();
   const [walletAddress, setWalletAddress] = useState("not-set");
+  const [badges, setBadges] = useState(0);
 
   useEffect(() => {
     if (provider) {
@@ -23,6 +24,16 @@ const Nav = () => {
     }
     setLoadingState("loaded");
   }, []);
+
+  function mapMoralisUserInfoToStateValues() {
+    const badgesValue = user?.get("badges");
+    if (badgesValue)
+      setBadges(badgesValue);
+  }
+
+  useEffect(() => {
+    mapMoralisUserInfoToStateValues();
+  }, [user && user.id]);
 
   function logoutFlyTV() {
     logoutWeb3Auth();
@@ -55,6 +66,11 @@ const Nav = () => {
         <a className={styles.logo}>ProjectMan</a>
       </Link>
       <div className={styles.rightNav}>
+        {loadingState == "loaded" && user && user.id && (
+              <button className={styles.connect}>
+                <span>Badges {badges}</span>
+              </button>
+        )}
         {loadingState == "loaded" && walletAddress != "not-set" && (
           <CopyToClipboard text={walletAddress}>
             <button className={styles.connect} onClick={copy}>

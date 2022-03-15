@@ -9,10 +9,11 @@ type Props = {
     teamData: any,
 }
 
-const TeamMultiSigWallet = ({ teamData }: Props)  => {
-    useRouter();
+const TeamMembers = ({ teamData }: Props)  => {
+    const router = useRouter();
+
     const [formValues, setFormValues] = useState({
-        multiSigWallet: ""
+        repoName: ""
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -32,10 +33,10 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
-        const multiSigWallet = teamData?.get("multiSigWallet");
+        const repoName = teamData?.get("repoName");
 
-        if (multiSigWallet)
-            formValues.multiSigWallet = multiSigWallet;
+        if (repoName)
+            formValues.repoName = repoName;
     }
 
     // create a function which set the values of form field
@@ -45,27 +46,11 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
-        if (formValues.multiSigWallet === "") {
-            errors.multiSigWallet = "MultiSigWallet is required";
+        if (formValues.repoName === "") {
+            errors.repoName = "RepoName is required";
         }
         return errors;
     };
-
-    const handleMultiSigWallet = (e) => {
-        e.preventDefault();
-        window.open('https://gnosis-safe.io/app/open', '_blank');
-    }
-
-    function incrementBadge() {
-        debugger;
-        const multiSigWallet = teamData?.get("multiSigWallet");
-        if (multiSigWallet) {
-        } else {
-            // @ts-ignore
-            user.increment("badges");
-            user.save();
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,15 +65,14 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
-        incrementBadge();
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
-        if (formValues.multiSigWallet) {
-            myTeamObj.set("multiSigWallet", formValues.multiSigWallet);
+        if (formValues.repoName) {
+            myTeamObj.set("repoName", formValues.repoName);
         }
         myTeamObj.save();
-        toast.success("Multi Sig Wallet Info Saved!", {
+        toast.success(" Github Info Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -100,21 +84,16 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
                 {loader == "loaded" &&
                     <form className={styles.form}>
                         <div className={styles.formGroups}>
-                            <button onClick={handleMultiSigWallet} className={styles.submit}>
-                                Create Multi sig wallet
-                            </button>
-                        </div>
-                        <div className={styles.formGroups}>
-                            {formErrors.multiSigWallet && (
-                                <p style={formErrorStyle}>{formErrors.multiSigWallet}</p>
+                            {formErrors.repoName && (
+                                <p style={formErrorStyle}>{formErrors.repoName}</p>
                             )}
-                            <label htmlFor="name">Multi Sig Wallet Address</label>
+                            <label htmlFor="name">Add Team Member</label>
                             <input
                                 type="text"
-                                value={formValues.multiSigWallet}
+                                value={formValues.repoName}
                                 name={Object.keys(formValues)[0]}
                                 onChange={handleOnChange}
-                                placeholder="Multi Sig Wallet Address"
+                                placeholder="Search And Add Team Member"
                             />
                         </div>
                         {!loading ? (
@@ -134,4 +113,4 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamMultiSigWallet;
+export default TeamMembers;
