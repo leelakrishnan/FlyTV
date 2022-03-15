@@ -544,3 +544,128 @@
     .logo{font-size:.8rem;}
   }
   /* end for nav */
+
+  .lot{
+
+    color:green;
+    font-size:1.2rem;
+    border-style:solid;
+    border-color:blue;
+    border-width:1px;
+    padding:10px;
+
+  }
+
+  .lot:hover{
+
+    color:white;
+    padding:17px;
+   
+  }
+
+.teamButton {
+  font-family: 'Press Start 2P';
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--color-theme-white);
+  width: 12.5rem;
+  height: 2.2rem;
+  background-color: blue;
+  margin-left: 1.5rem;
+}
+
+
+
+.teamButton:hover {
+  background-color: orange;
+}
+
+.teamButton2 {
+  font-family: 'Press Start 2P';
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--color-theme-white);
+  width: 12.5rem;
+  height: 2.2rem;
+  background-color: green;
+  margin-left: 1.5rem;
+}
+
+
+
+
+.teamButton2:hover {
+  background-color: orange;
+}
+.teamButton3 {
+  font-family: 'Press Start 2P';
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--color-theme-white);
+  width: 12.5rem;
+  height: 2.2rem;
+  background-color: green;
+  margin-left: 1.5rem;
+}
+
+
+
+
+.teamButton3:hover {
+  background-color: red;
+}
+
+.verifyTop{
+  margin-top:80px;
+}
+.verifyTop h2{
+color:rosybrown;
+
+}
+.verifyTop p{
+color:yellow;
+padding:35px;
+border-style:dashed;
+border-color:yellow;
+border-width:1px;
+font-size:1.3rem;
+}
+.verifyButtonRow{
+padding-top:45px;
+
+
+}
+
+.verifytxt{
+color:orange;
+  font-size:1.4rem;
+  padding-left:20px;
+}
+
+.listTop{
+margin-top:70px;
+
+}
+.tlist{
+margin-top:75px;
+
+}
+
+.tlistHead{
+font-size:1.4rem;
+color:rosybrown;
+padding-left:35px;
+padding-bottom:20px;
+font-weight:bold;
+}
+
+.tlistHeadR{
+  font-size:1.4rem;
+  color:rosybrown;
+padding-left:170px;
+padding-bottom:20px;
+font-weight:bold;
+}
