@@ -9,11 +9,11 @@ type Props = {
     teamData: any,
 }
 
-const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
+const TeamTodo = ({ teamData }: Props)  => {
     const router = useRouter();
 
     const [formValues, setFormValues] = useState({
-        gatherRoom: ""
+        repoName: ""
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -33,10 +33,10 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
-        const gatherRoom = teamData?.get("gatherRoom");
+        const repoName = teamData?.get("repoName");
 
-        if (gatherRoom)
-            formValues.gatherRoom = gatherRoom;
+        if (repoName)
+            formValues.repoName = repoName;
     }
 
     // create a function which set the values of form field
@@ -46,8 +46,8 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
-        if (formValues.gatherRoom === "") {
-            errors.gatherRoom = "Gather Room is required";
+        if (formValues.repoName === "") {
+            errors.repoName = "RepoName is required";
         }
         return errors;
     };
@@ -65,11 +65,14 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
-
-        // ToDO
-        // Call api to create Space. get teh LInk and save it to Team Moralis Object.
-
-        toast.success(" Gathertown Space created!", {
+        const myTeam = Moralis.Object.extend("Team");
+        const myTeamObj = new myTeam();
+        myTeamObj.set("id", teamData.id);
+        if (formValues.repoName) {
+            myTeamObj.set("repoName", formValues.repoName);
+        }
+        myTeamObj.save();
+        toast.success(" Github Info Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -80,21 +83,23 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
             <div className={styles.container}>
                 {loader == "loaded" &&
                     <form className={styles.form}>
-                        {formValues.gatherRoom !== "" &&
-                            <div className={styles.formGroups}>
-                                <label htmlFor="name">Accept Reject Invitees</label>
-                                <input
-                                    type="text"
-                                    value={formValues.gatherRoom}
-                                    name={Object.keys(formValues)[0]}
-                                    disabled={true}
-                                />
-                            </div>
-                        }
+                        <div className={styles.formGroups}>
+                            {formErrors.repoName && (
+                                <p style={formErrorStyle}>{formErrors.repoName}</p>
+                            )}
+                            <label htmlFor="name">Team Todo</label>
+                            <input
+                                type="text"
+                                value={formValues.repoName}
+                                name={Object.keys(formValues)[0]}
+                                onChange={handleOnChange}
+                                placeholder="Team Todo"
+                            />
+                        </div>
                         {!loading ? (
                             <div className={styles.formGroups}>
                                 <button onClick={handleSubmit} className={styles.submit}>
-                                    Accept Reject Invitees
+                                    Submit
                                 </button>
                             </div>
                         ) : (
@@ -108,4 +113,4 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamAcceptRejectInvitees;
+export default TeamTodo;
