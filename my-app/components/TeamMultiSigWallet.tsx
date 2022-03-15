@@ -56,6 +56,17 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
         window.open('https://gnosis-safe.io/app/open', '_blank');
     }
 
+    function incrementBadge() {
+        debugger;
+        const multiSigWallet = teamData?.get("multiSigWallet");
+        if (multiSigWallet) {
+        } else {
+            // @ts-ignore
+            user.increment("badges");
+            user.save();
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("HERE");
@@ -69,6 +80,7 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
+        incrementBadge();
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);

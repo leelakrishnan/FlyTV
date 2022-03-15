@@ -133,9 +133,8 @@ const MyTeam = () => {
                             <Tab label="Video Drive" {...a11yProps(3)} />
                             <Tab label="Multi Sig Wallet" {...a11yProps(4)} />
                             <Tab label="Project Management" {...a11yProps(5)} />
-                            <Tab label="Accept Reject Invitees" {...a11yProps(6)} />
-                            <Tab label="Team Members" {...a11yProps(7)} />
-                            <Tab label="To Do" {...a11yProps(8)} />
+                            <Tab label="Team Members" {...a11yProps(6)} />
+                            <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
@@ -156,13 +155,10 @@ const MyTeam = () => {
                             <TeamProjectManagement teamData={teamData}  />
                         </TabPanel>
                         <TabPanel value={value} index={6}>
-                            <TeamAcceptRejectInvitees teamData={teamData}  />
-                        </TabPanel>
-                        <TabPanel value={value} index={7}>
                             <TeamMembers teamData={teamData}  />
                         </TabPanel>
-                        <TabPanel value={value} index={8}>
-                            <TeamTodo teamData={teamData}  />
+                        <TabPanel value={value} index={7}>
+                            <TeamAcceptRejectInvitees teamData={teamData}  />
                         </TabPanel>
                     </Box>
                 )}

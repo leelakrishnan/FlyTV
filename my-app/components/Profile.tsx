@@ -133,6 +133,14 @@ const Profile = () => {
     router.push('/Team');
   };
 
+  function getBadges() {
+    let initialUserEmall = user?.get("email");
+    if (initialUserEmall) {
+    } else {
+      return 1;
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("HERE");
@@ -146,6 +154,8 @@ const Profile = () => {
     validateError();
     console.log("formValues", formValues);
     setLoading(true);
+    let badges = getBadges();
+
     setUserData({
       email: formValues.email === "" ? undefined : formValues.email,
       firstName: formValues.firstName === "" ? undefined : formValues.firstName,
@@ -160,6 +170,7 @@ const Profile = () => {
       city: formValues.city === "" ? undefined : formValues.city,
       skills: selectedSkill.length === 0 ? undefined : JSON.stringify(selectedSkill),
       level: selectedLevel === "" ? undefined : selectedLevel,
+      badges: badges
     })
     toast.success(" Profile Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
