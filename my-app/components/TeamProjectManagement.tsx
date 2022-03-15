@@ -6,16 +6,13 @@ import { useRouter } from 'next/router'
 import Moralis from "moralis";
 
 type Props = {
-    teamData: any
+    teamData: any,
 }
 
-const TeamMission = ({ teamData }: Props)  => {
-    const router = useRouter();
-
+const TeamProjectManagement = ({ teamData }: Props)  => {
+    useRouter();
     const [formValues, setFormValues] = useState({
-        teamName: "",
-        mission: "",
-        vision: ""
+        projectManagementUrl: ""
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -25,6 +22,7 @@ const TeamMission = ({ teamData }: Props)  => {
     useEffect(() => {
         mapMoralisTeamToFormValues();
         setLoader("loaded");
+
     }, [user]);
 
     const formErrorStyle = {
@@ -34,17 +32,10 @@ const TeamMission = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
-        const teamName = teamData?.get("teamName");
-        const vision = teamData?.get("vision");
-        const mission = teamData?.get("mission");
+        const projectManagementUrl = teamData?.get("projectManagementUrl");
 
-        if (teamName)
-            formValues.teamName = teamName;
-        if (vision)
-            formValues.vision = vision;
-        if (mission)
-            formValues.mission = mission;
-
+        if (projectManagementUrl)
+            formValues.projectManagementUrl = projectManagementUrl;
     }
 
     // create a function which set the values of form field
@@ -54,22 +45,16 @@ const TeamMission = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
-        if (formValues.teamName === "") {
-            errors.teamName = "Team Name is required";
-        }
-        if (formValues.vision === "") {
-            errors.vision = "Vision is required";
-        }
-        if (formValues.mission === "") {
-            errors.mission = "Mission is required";
+        if (formValues.projectManagementUrl === "") {
+            errors.projectManagementUrl = "Project Management Url is required";
         }
         return errors;
     };
 
     function incrementBadge() {
         debugger;
-        const teamName = teamData?.get("teamName");
-        if (teamName) {
+        const projectManagementUrl = teamData?.get("projectManagementUrl");
+        if (projectManagementUrl) {
         } else {
             // @ts-ignore
             user.increment("badges");
@@ -94,17 +79,11 @@ const TeamMission = ({ teamData }: Props)  => {
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
-        if (formValues.teamName) {
-            myTeamObj.set("teamName", formValues.teamName);
-        }
-        if (formValues.mission) {
-            myTeamObj.set("mission", formValues.mission);
-        }
-        if (formValues.vision) {
-            myTeamObj.set("vision", formValues.vision);
+        if (formValues.projectManagementUrl) {
+            myTeamObj.set("projectManagementUrl", formValues.projectManagementUrl);
         }
         myTeamObj.save();
-        toast.success(" Team Info is Saved!", {
+        toast.success("Project Management Url Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -116,42 +95,16 @@ const TeamMission = ({ teamData }: Props)  => {
                 {loader == "loaded" &&
                     <form className={styles.form}>
                         <div className={styles.formGroups}>
-                            {formErrors.teamName && (
-                                <p style={formErrorStyle}>{formErrors.teamName}</p>
+                            {formErrors.projectManagementUrl && (
+                                <p style={formErrorStyle}>{formErrors.projectManagementUrl}</p>
                             )}
-                            <label htmlFor="name">TeamName</label>
+                            <label htmlFor="name">Project Management Link</label>
                             <input
                                 type="text"
-                                value={formValues.teamName}
+                                value={formValues.projectManagementUrl}
                                 name={Object.keys(formValues)[0]}
                                 onChange={handleOnChange}
-                                placeholder="TeamName"
-                            />
-                        </div>
-                        <div className={styles.formGroups}>
-                            {formErrors.mission && (
-                                <p style={formErrorStyle}>{formErrors.mission}</p>
-                            )}
-                            <label htmlFor="name">Mission</label>
-                            <input
-                                type="text"
-                                value={formValues.mission}
-                                name={Object.keys(formValues)[1]}
-                                onChange={handleOnChange}
-                                placeholder="Mission"
-                            />
-                        </div>
-                        <div className={styles.formGroups}>
-                            {formErrors.vision && (
-                                <p style={formErrorStyle}>{formErrors.vision}</p>
-                            )}
-                            <label htmlFor="name">Vision</label>
-                            <input
-                                type="text"
-                                value={formValues.vision}
-                                name={Object.keys(formValues)[2]}
-                                onChange={handleOnChange}
-                                placeholder="Vision"
+                                placeholder="Project Management Link"
                             />
                         </div>
                         {!loading ? (
@@ -171,4 +124,4 @@ const TeamMission = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamMission;
+export default TeamProjectManagement;

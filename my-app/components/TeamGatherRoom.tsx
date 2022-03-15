@@ -54,13 +54,22 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
         return errors;
     };
 
+    function incrementBadge() {
+        const gatherRoom = teamData?.get("gatherRoom");
+        if (gatherRoom) {
+        } else {
+            // @ts-ignore
+            user.increment("badges");
+            user.save();
+        }
+    }
+
     async function makeGatherApiCall(roomName: string) {
         axios
             .post('https://4lbyt5w5m7.execute-api.us-east-1.amazonaws.com/test/v1/createRoom', {
                 name: roomName
             })
             .then(response => {
-                debugger;
                 if (response && response.data) {
                     const myTeam = Moralis.Object.extend("Team");
                     const myTeamObj = new myTeam();
@@ -82,16 +91,6 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
             });
     }
 
-    async function createRoomInGatherTown(roomName: string) {
-        try {
-            console.log(roomName);
-            return await makeGatherApiCall(roomName);
-        } catch (error) {
-            console.log(error);
-            return "";
-        }
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log("HERE");
@@ -105,6 +104,7 @@ const TeamGatherRoom = ({ teamData }: Props)  => {
         console.log("formValues", formValues);
         if (formValues.gatherRoom) {
             setLoading(true);
+            incrementBadge();
             const noSpecialCharactersGatherRoom = formValues.gatherRoom.replace(/[^a-zA-Z0-9 ]/g, '');
             await makeGatherApiCall(noSpecialCharactersGatherRoom);
         }

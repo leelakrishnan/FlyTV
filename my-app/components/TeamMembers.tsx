@@ -9,7 +9,7 @@ type Props = {
     teamData: any,
 }
 
-const TeamGithub = ({ teamData }: Props)  => {
+const TeamMembers = ({ teamData }: Props)  => {
     const router = useRouter();
 
     const [formValues, setFormValues] = useState({
@@ -65,7 +65,6 @@ const TeamGithub = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
-        incrementBadge();
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
@@ -79,17 +78,6 @@ const TeamGithub = ({ teamData }: Props)  => {
         setLoading(false);
     };
 
-    function incrementBadge() {
-        debugger;
-        const repoName = teamData?.get("repoName");
-        if (repoName) {
-        } else {
-            // @ts-ignore
-            user.increment("badges");
-            user.save();
-        }
-    }
-
     return (
         <>
             <div className={styles.container}>
@@ -99,13 +87,13 @@ const TeamGithub = ({ teamData }: Props)  => {
                             {formErrors.repoName && (
                                 <p style={formErrorStyle}>{formErrors.repoName}</p>
                             )}
-                            <label htmlFor="name">Repository Name</label>
+                            <label htmlFor="name">Add Team Member</label>
                             <input
                                 type="text"
                                 value={formValues.repoName}
                                 name={Object.keys(formValues)[0]}
                                 onChange={handleOnChange}
-                                placeholder="Repository Name"
+                                placeholder="Search And Add Team Member"
                             />
                         </div>
                         {!loading ? (
@@ -125,4 +113,4 @@ const TeamGithub = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamGithub;
+export default TeamMembers;

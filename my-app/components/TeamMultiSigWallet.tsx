@@ -6,16 +6,13 @@ import { useRouter } from 'next/router'
 import Moralis from "moralis";
 
 type Props = {
-    teamData: any
+    teamData: any,
 }
 
-const TeamMission = ({ teamData }: Props)  => {
-    const router = useRouter();
-
+const TeamMultiSigWallet = ({ teamData }: Props)  => {
+    useRouter();
     const [formValues, setFormValues] = useState({
-        teamName: "",
-        mission: "",
-        vision: ""
+        multiSigWallet: ""
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -25,6 +22,7 @@ const TeamMission = ({ teamData }: Props)  => {
     useEffect(() => {
         mapMoralisTeamToFormValues();
         setLoader("loaded");
+
     }, [user]);
 
     const formErrorStyle = {
@@ -34,17 +32,10 @@ const TeamMission = ({ teamData }: Props)  => {
     };
 
     function mapMoralisTeamToFormValues() {
-        const teamName = teamData?.get("teamName");
-        const vision = teamData?.get("vision");
-        const mission = teamData?.get("mission");
+        const multiSigWallet = teamData?.get("multiSigWallet");
 
-        if (teamName)
-            formValues.teamName = teamName;
-        if (vision)
-            formValues.vision = vision;
-        if (mission)
-            formValues.mission = mission;
-
+        if (multiSigWallet)
+            formValues.multiSigWallet = multiSigWallet;
     }
 
     // create a function which set the values of form field
@@ -54,22 +45,21 @@ const TeamMission = ({ teamData }: Props)  => {
 
     const validateError = () => {
         const errors = {};
-        if (formValues.teamName === "") {
-            errors.teamName = "Team Name is required";
-        }
-        if (formValues.vision === "") {
-            errors.vision = "Vision is required";
-        }
-        if (formValues.mission === "") {
-            errors.mission = "Mission is required";
+        if (formValues.multiSigWallet === "") {
+            errors.multiSigWallet = "MultiSigWallet is required";
         }
         return errors;
     };
 
+    const handleMultiSigWallet = (e) => {
+        e.preventDefault();
+        window.open('https://gnosis-safe.io/app/open', '_blank');
+    }
+
     function incrementBadge() {
         debugger;
-        const teamName = teamData?.get("teamName");
-        if (teamName) {
+        const multiSigWallet = teamData?.get("multiSigWallet");
+        if (multiSigWallet) {
         } else {
             // @ts-ignore
             user.increment("badges");
@@ -94,17 +84,11 @@ const TeamMission = ({ teamData }: Props)  => {
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
-        if (formValues.teamName) {
-            myTeamObj.set("teamName", formValues.teamName);
-        }
-        if (formValues.mission) {
-            myTeamObj.set("mission", formValues.mission);
-        }
-        if (formValues.vision) {
-            myTeamObj.set("vision", formValues.vision);
+        if (formValues.multiSigWallet) {
+            myTeamObj.set("multiSigWallet", formValues.multiSigWallet);
         }
         myTeamObj.save();
-        toast.success(" Team Info is Saved!", {
+        toast.success("Multi Sig Wallet Info Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
@@ -116,42 +100,21 @@ const TeamMission = ({ teamData }: Props)  => {
                 {loader == "loaded" &&
                     <form className={styles.form}>
                         <div className={styles.formGroups}>
-                            {formErrors.teamName && (
-                                <p style={formErrorStyle}>{formErrors.teamName}</p>
+                            <button onClick={handleMultiSigWallet} className={styles.submit}>
+                                Create Multi sig wallet
+                            </button>
+                        </div>
+                        <div className={styles.formGroups}>
+                            {formErrors.multiSigWallet && (
+                                <p style={formErrorStyle}>{formErrors.multiSigWallet}</p>
                             )}
-                            <label htmlFor="name">TeamName</label>
+                            <label htmlFor="name">Multi Sig Wallet Address</label>
                             <input
                                 type="text"
-                                value={formValues.teamName}
+                                value={formValues.multiSigWallet}
                                 name={Object.keys(formValues)[0]}
                                 onChange={handleOnChange}
-                                placeholder="TeamName"
-                            />
-                        </div>
-                        <div className={styles.formGroups}>
-                            {formErrors.mission && (
-                                <p style={formErrorStyle}>{formErrors.mission}</p>
-                            )}
-                            <label htmlFor="name">Mission</label>
-                            <input
-                                type="text"
-                                value={formValues.mission}
-                                name={Object.keys(formValues)[1]}
-                                onChange={handleOnChange}
-                                placeholder="Mission"
-                            />
-                        </div>
-                        <div className={styles.formGroups}>
-                            {formErrors.vision && (
-                                <p style={formErrorStyle}>{formErrors.vision}</p>
-                            )}
-                            <label htmlFor="name">Vision</label>
-                            <input
-                                type="text"
-                                value={formValues.vision}
-                                name={Object.keys(formValues)[2]}
-                                onChange={handleOnChange}
-                                placeholder="Vision"
+                                placeholder="Multi Sig Wallet Address"
                             />
                         </div>
                         {!loading ? (
@@ -171,4 +134,4 @@ const TeamMission = ({ teamData }: Props)  => {
         </>
     );
 }
-export default TeamMission;
+export default TeamMultiSigWallet;
