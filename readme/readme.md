@@ -11,3 +11,7 @@ If you book an hour of time and it's only thirty minutes. Standard meeting is on
 To Do: Add the Konstantine document.
 
 Someone should get points for taking notes. If meeting goes long the scribe gets another point. In a perfect world Neel would have built a machine learning. Turn audio into text. Someon can summarize the meeting. but he would have gotten points. 
+
+Some change
+
+Tippi's Notion
