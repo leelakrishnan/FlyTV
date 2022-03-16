@@ -1,5 +1,5 @@
 // this component is to create an example of a hardcoded but easily modifiable react-checklist
-// checklist for team project management.
+// checklist for team project management, doubled down on documentation thanks to Brian
 // correct sequence obtained thanks to Shomari
 import React from "react";
 
