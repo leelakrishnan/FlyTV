@@ -21,6 +21,7 @@ const TeamMission = ({ teamData }: Props)  => {
     const [loading, setLoading] = useState(false);
     const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
     const [loader, setLoader] = useState("not-loaded");
+    const [lookingForTeamMembers, setLookingForTeamMembers] = useState(false);
 
     useEffect(() => {
         mapMoralisTeamToFormValues();
@@ -37,6 +38,8 @@ const TeamMission = ({ teamData }: Props)  => {
         const teamName = teamData?.get("teamName");
         const vision = teamData?.get("vision");
         const mission = teamData?.get("mission");
+        const lookingForTeamMembers = teamData?.get("lookingForTeamMembers");
+
 
         if (teamName)
             formValues.teamName = teamName;
@@ -44,6 +47,8 @@ const TeamMission = ({ teamData }: Props)  => {
             formValues.vision = vision;
         if (mission)
             formValues.mission = mission;
+        if (lookingForTeamMembers)
+            setLookingForTeamMembers(lookingForTeamMembers);
 
     }
 
@@ -103,12 +108,19 @@ const TeamMission = ({ teamData }: Props)  => {
         if (formValues.vision) {
             myTeamObj.set("vision", formValues.vision);
         }
+        myTeamObj.set("lookingForTeamMembers", lookingForTeamMembers);
         myTeamObj.save();
         toast.success(" Team Info is Saved!", {
             position: toast.POSITION.BOTTOM_CENTER,
         });
         setLoading(false);
     };
+
+    function handleCheckChange(e) {
+        e.preventDefault();
+        if (e.target.checked)
+            setLookingForTeamMembers(true);
+    }
 
     return (
         <>
@@ -153,6 +165,15 @@ const TeamMission = ({ teamData }: Props)  => {
                                 onChange={handleOnChange}
                                 placeholder="Vision"
                             />
+                        </div>
+                        <div className={styles.formGroups}>
+                            <label htmlFor="lookingForTeamMembers">Are your team looking for Team members?</label>
+                            {!lookingForTeamMembers ? (
+                                <input onChange={handleCheckChange} type="checkbox" id="lookingForTeamMembers" name={"lookingForTeamMembers"}></input>
+                            ) : (
+                                    <input onChange={handleCheckChange}  checked={true} type="checkbox" id="lookingForTeamMembers"
+                                           name={"lookingForTeamMembers"}></input>
+                            )}
                         </div>
                         {!loading ? (
                             <div className={styles.formGroups}>

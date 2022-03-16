@@ -90,7 +90,9 @@ const Team: NextPage = () => {
 
             for (let i = 0; i < teamData.length; i++) {
                 const teamName = teamData[i]?.get("teamName");
-                if (teamName) {
+                const lookingForTeamMembers = teamData[i]?.get("lookingForTeamMembers");
+
+                if (teamName && lookingForTeamMembers) {
                     let teamName = teamData[i]?.get("teamName") ? teamData[i]?.get("teamName") : "";
                     let mission = teamData[i]?.get("mission") ? teamData[i]?.get("mission") : "";
                     let vision = teamData[i]?.get("vision") ? teamData[i]?.get("vision") : "";
