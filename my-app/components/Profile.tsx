@@ -210,7 +210,7 @@ const Profile = () => {
     toast.success(" Profile Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
-    router.push('/Team');
+    router.push('/Hackathon');
     setLoading(false);
   };
 
