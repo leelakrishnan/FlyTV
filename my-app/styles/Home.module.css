@@ -602,3 +602,10 @@
 .MuiIconButton-label {
   display: block;
 }
+
+.teamGroups {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
