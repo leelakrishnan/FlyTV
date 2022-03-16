@@ -172,3 +172,16 @@
 .top {
   top: 0;
 }
+
+.MuiButtonBase-root {
+  padding: 12px 16px !important;
+  padding-top: 12px  !important;
+  padding-right: 16px  !important;
+  padding-bottom: 12px  !important;
+  padding-left: 16px  !important;
+
+}
+
+.MuiIconButton-label {
+  display: block;
+}

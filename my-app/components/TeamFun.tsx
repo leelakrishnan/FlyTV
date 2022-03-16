@@ -44,8 +44,6 @@ const TeamFun = ({ teamData }: Props)  => {
 
     const getMemeImage= async (e) => {
         e.preventDefault();
-
-        debugger;
         const randomNumber = Math.floor(Math.random() * allMemes.length)
         const url = allMemes[randomNumber].url;
         setMeme(prevMeme => ({
