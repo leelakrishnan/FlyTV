@@ -80,7 +80,7 @@ const TeamGithub = ({ teamData }: Props)  => {
     };
 
     function incrementBadge() {
-        debugger;
+        
         const repoName = teamData?.get("repoName");
         if (repoName) {
         } else {

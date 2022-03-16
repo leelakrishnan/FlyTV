@@ -9,17 +9,14 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
-import Profile from "../components/Profile";
 import TeamMission from "../components/TeamMission";
 import TeamGithub from "../components/TeamGithub";
 import TeamGatherRoom from "../components/TeamGatherRoom";
 import TeamAcceptRejectInvitees from "../components/TeamAcceptRejectInvitees";
 import TeamVideoDrive from "../components/TeamVideoDrive";
-import styles from '../styles/Home.module.css'
 import TeamMultiSigWallet from "../components/TeamMultiSigWallet";
 import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
-import TeamTodo from "../components/TeamTodo";
 import TeamFun from "../components/TeamFun";
 
 function TabPanel(props) {
@@ -73,7 +70,7 @@ const MyTeam = () => {
                             }
                         })
                         .catch(function (error) {
-                            debugger;
+                            
                         });
                 }
                 await getTeamForUser(user.id);
@@ -87,24 +84,6 @@ const MyTeam = () => {
     const handleChange = (event: any, newValue: any) => {
         setValue(newValue);
     };
-
-    const handleTeamMission = async (values: any) => {
-        try {
-            debugger;
-        } catch (error) {
-            console.log(error);
-        }
-        console.log(values);
-    }
-
-    const handleGitHub = async (values: any) => {
-        try {
-            debugger;
-        } catch (error) {
-            console.log(error);
-        }
-        console.log(values);
-    }
 
     // @ts-ignore
     return (
