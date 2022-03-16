@@ -20,10 +20,14 @@ const Team: NextPage = () => {
     const [teamLoaded, setTeamLoaded] = useState("not-loaded");
     const [value, setValue] = useState("1");
     const [teamsLooking, setTeamsLooking] = useState([]);
+    const [allTeamData, setAllTeamData] = useState({});
+
     const columns = [
         {title: 'TeamName', field: 'teamName'},
         {title: 'TeamMission', field: 'mission'},
-        {title: 'TeamVision', field: 'vision'}
+        {title: 'TeamVision', field: 'vision'},
+        {title: 'TeamId', field: 'teamId'}
+
     ];
     useEffect(() => {
         (async () => {
@@ -65,10 +69,10 @@ const Team: NextPage = () => {
     const createTeam = async () => {
         const Team = Moralis.Object.extend("Team");
         const publicTeam = new Team();
-        const postACL = new Moralis.ACL(Moralis.User.current());
-        postACL.setPublicReadAccess(true);
+        const teamACL = new Moralis.ACL(Moralis.User.current());
+        teamACL.setPublicReadAccess(true);
         publicTeam.set("users", [user.id.toString()]);
-        publicTeam.setACL(postACL);
+        publicTeam.setACL(teamACL);
 
         publicTeam.save();
         toast.success("Team Created!", {
@@ -80,6 +84,13 @@ const Team: NextPage = () => {
     async function getTeamsLookingForTeamMebers() {
         const Team = Moralis.Object.extend("Team");
         const query = new Moralis.Query(Team);
+        return query.find();
+    }
+
+    async function getTeamInvitesByTeamId(teamId: string) {
+        const TeamInvitees = Moralis.Object.extend("TeamInvitees");
+        const query = new Moralis.Query(TeamInvitees);
+        query.equalTo("teamId", teamId);
         return query.find();
     }
 
@@ -96,14 +107,16 @@ const Team: NextPage = () => {
                     let teamName = teamData[i]?.get("teamName") ? teamData[i]?.get("teamName") : "";
                     let mission = teamData[i]?.get("mission") ? teamData[i]?.get("mission") : "";
                     let vision = teamData[i]?.get("vision") ? teamData[i]?.get("vision") : "";
-
+                    let teamId = teamData[i]?.id ? teamData[i]?.id : "";
                     teamsFilteredData.push({
                         teamName: teamName,
                         mission: mission,
-                        vision: vision
+                        vision: vision,
+                        teamId: teamId
                     });
                 }
             }
+            setAllTeamData(teamData);
             // @ts-ignore
             setTeamsLooking(teamsFilteredData);
             debugger;
@@ -127,6 +140,67 @@ const Team: NextPage = () => {
                 break;
             default:
         }
+    }
+
+    const sendInvite = async (event: any, rowData: any) => {
+
+        let currentTeamId = rowData?.teamId;
+
+        if (allTeamData && currentTeamId) {
+            let currentTeam = {};
+            for (let i = 0; i < allTeamData.length; i++) {
+                const teamId = allTeamData[i]?.id;
+                if (teamId == currentTeamId) {
+                    currentTeam = allTeamData[i];
+                    break;
+                }
+            }
+
+            debugger;
+
+            if (currentTeam) {
+                const TeamInvitees = Moralis.Object.extend("TeamInvitees");
+                const publicTeamInvitees = new TeamInvitees();
+                const teamInviteesACL = new Moralis.ACL(Moralis.User.current());
+                teamInviteesACL.setPublicReadAccess(true);
+                publicTeamInvitees.set("teamId", currentTeamId);
+
+                const teamInvitees = await getTeamInvitesByTeamId(currentTeamId);
+                let invitees = [];
+                if (teamInvitees && teamInvitees.length > 0) {
+                    let currentInvitees = teamInvitees[0]?.get("invitees");
+                    if (currentInvitees && currentInvitees.length > 0) {
+                        for (let j = 0; j < currentInvitees.length; j++) {
+                            const existingInvitee = currentInvitees[j];
+                            if (existingInvitee == user.id) {
+                                toast.success("Invitation Already Sent! to Team " + rowData.teamName, {
+                                    position: toast.POSITION.BOTTOM_CENTER,
+                                });
+                                return;
+                            }
+                        }
+                        invitees = currentInvitees;
+                        invitees.push(user.id);
+                    }
+                    publicTeamInvitees.set("id", teamInvitees[0].id);
+                } else {
+                    invitees.push(user.id);
+                }
+                publicTeamInvitees.set("invitees", invitees);
+                publicTeamInvitees.setACL(teamInviteesACL);
+                publicTeamInvitees.save();
+
+                toast.success("Invitation Sent! to Team " + rowData.teamName, {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                });
+            }
+
+        }
+    }
+
+    function checkTeam(event: any, rowData: any) {
+        event.preventDefault();
+        router.push('http://localhost:3000/MyTeam?teamQueryId=' + rowData.teamId);
     }
 
     // @ts-ignore
@@ -182,6 +256,24 @@ const Team: NextPage = () => {
                                                         title="Team members"
                                                         columns={columns}
                                                         data={teamsLooking}
+                                                        actions={[
+                                                            {
+                                                                icon: 'Send Invite',
+                                                                tooltip: 'Send Invite',
+                                                                onClick: (event, rowData) => {
+                                                                    console.dir(rowData);
+                                                                    sendInvite(event, rowData);
+                                                                }
+                                                            },
+                                                            {
+                                                                icon: 'CheckTeam',
+                                                                tooltip: 'CheckTeam',
+                                                                onClick: (event, rowData) => {
+                                                                    console.dir(rowData);
+                                                                    checkTeam(event, rowData);
+                                                                }
+                                                            }
+                                                        ]}
                                                     />
                                                 </div>
                                             </>
