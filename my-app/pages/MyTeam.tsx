@@ -18,6 +18,7 @@ import TeamMultiSigWallet from "../components/TeamMultiSigWallet";
 import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
 import TeamFun from "../components/TeamFun";
+import Project from "../components/Project";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -142,7 +143,8 @@ const MyTeam = () => {
                             <Tab label="Project Management" {...a11yProps(5)} />
                             <Tab label="Team Members" {...a11yProps(6)} />
                             <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
-                            <Tab label="Team Fun" {...a11yProps(8)} />
+                            <Tab label="Project Man" {...a11yProps(8)} />
+                            <Tab label="Team Fun" {...a11yProps(9)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
@@ -169,6 +171,9 @@ const MyTeam = () => {
                             <TeamAcceptRejectInvitees teamData={teamData}  />
                         </TabPanel>
                         <TabPanel value={value} index={8}>
+                            <Project teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={9}>
                             <TeamFun teamData={teamData}  />
                         </TabPanel>
                     </Box>

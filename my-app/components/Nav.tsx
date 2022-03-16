@@ -62,9 +62,6 @@ const Nav = () => {
       <Link href="/Hackathon" passHref>
         <a className={styles.logo}>Hackathon</a>
       </Link>
-      <Link href="/ProjectMan" passHref>
-        <a className={styles.logo}>ProjectMan</a>
-      </Link>
       <div className={styles.rightNav}>
         {loadingState == "loaded" && user && user.id && (
               <button className={styles.connect}>
