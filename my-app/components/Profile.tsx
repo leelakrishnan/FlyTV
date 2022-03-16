@@ -59,13 +59,35 @@ const Profile = () => {
     paddingBottom: "0.5rem",
   };
 
+  const {profileId} = router.query;
+
   useEffect(() => {
-    mapMoralisUserInfoToFormValues();
+    if (profileId) {
+      loadProfileByProfileId(profileId);
+    } else {
+      mapMoralisUserInfoToFormValues(user);
+    }
   }, [user]);
 
-  function mapMoralisUserInfoToFormValues() {
+  function loadProfileByProfileId(profileId: string) {
+    async function getMemberInfo(profileId: string) {
+      const userQuery = new Moralis.Query(Moralis.User);
+      userQuery.equalTo("objectId",
+          profileId);
+      const data = await userQuery.find({useMasterKey: true});
+      if (data && data.length > 0 && data[0].id) {
+        mapMoralisUserInfoToFormValues(data[0]);
+      }
+    }
+    if (profileId) {
+      getMemberInfo(profileId).then((value) => {
+      });
+    }
+  }
 
+  function mapMoralisUserInfoToFormValues(user: any) {
     const email = user?.get("email");
+    const emailAddress = user?.get("emailAddress");
     const userName = user?.get("username");
     const firstName = user?.get("firstName");
     const lastName = user?.get("lastName");
@@ -81,8 +103,12 @@ const Profile = () => {
     const skills = user?.get("skills");
     const level = user?.get("level");
 
-    if (email)
+    if (email) {
       formValues.email = email;
+    } else if (emailAddress) {
+      formValues.email = emailAddress;
+    }
+
     if (userName)
       formValues.userName = userName;
     if (firstName)
