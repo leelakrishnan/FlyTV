@@ -59,8 +59,8 @@ const Nav = () => {
       <Link href="/MyProfile" passHref>
         <a className={styles.logo}>My Profile</a>
       </Link>
-      <Link href="/MyTeam" passHref>
-        <a className={styles.logo}>MyTeam</a>
+      <Link href="/Team" passHref>
+        <a className={styles.logo}>Team</a>
       </Link>
       <Link href="/ProjectMan" passHref>
         <a className={styles.logo}>ProjectMan</a>

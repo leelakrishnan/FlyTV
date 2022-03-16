@@ -57,7 +57,7 @@ const TeamMultiSigWallet = ({ teamData }: Props)  => {
     }
 
     function incrementBadge() {
-        debugger;
+        
         const multiSigWallet = teamData?.get("multiSigWallet");
         if (multiSigWallet) {
         } else {

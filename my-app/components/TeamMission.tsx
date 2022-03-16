@@ -67,7 +67,7 @@ const TeamMission = ({ teamData }: Props)  => {
     };
 
     function incrementBadge() {
-        debugger;
+        
         const teamName = teamData?.get("teamName");
         if (teamName) {
         } else {
