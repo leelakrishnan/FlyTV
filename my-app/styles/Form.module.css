@@ -192,3 +192,7 @@
   justify-content: center;
   padding: 20px;
 }
+
+.formGroups > ul {
+  list-style-type: none;
+}
