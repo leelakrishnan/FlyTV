@@ -20,6 +20,7 @@ import TeamMultiSigWallet from "../components/TeamMultiSigWallet";
 import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
 import TeamTodo from "../components/TeamTodo";
+import TeamFun from "../components/TeamFun";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -117,55 +118,58 @@ const MyTeam = () => {
       </Head>
       <main>
         <Nav />
-
-        {loading == "not-loaded" ? (
-          <Loader loaderMessage="Processing..." />
-        ) : (
-          teamId &&
-          teamData &&
-          teamLoaded === "loaded" && (
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <Tabs value={value} onChange={handleChange} aria-label="My Team">
-                <Tab label="Team Info" {...a11yProps(0)} />
-                <Tab label="Github" {...a11yProps(1)} />
-                <Tab label="GatherTown Space" {...a11yProps(2)} />
-                <Tab label="Video Drive" {...a11yProps(3)} />
-                <Tab label="Multi Sig Wallet" {...a11yProps(4)} />
-                <Tab label="Project Management" {...a11yProps(5)} />
-                <Tab label="Team Members" {...a11yProps(6)} />
-                <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
-              </Tabs>
-              <TabPanel value={value} index={0}>
-                <TeamMission teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                <TeamGithub teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <TeamGatherRoom teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={3}>
-                <TeamVideoDrive teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={4}>
-                <TeamMultiSigWallet teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={5}>
-                <TeamProjectManagement teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={6}>
-                <TeamMembers teamData={teamData} />
-              </TabPanel>
-              <TabPanel value={value} index={7}>
-                <TeamAcceptRejectInvitees teamData={teamData} />
-              </TabPanel>
-            </Box>
-          )
-        )}
-        {/* <Footer /> */}
-      </main>
-    </>
-  );
+                {loading == "not-loaded" ? (
+                    <Loader loaderMessage="Processing..."/>
+                ) : teamId && teamData && teamLoaded === "loaded"  && (
+                    <Box sx={{borderBottom: 1, borderColor: "divider"}}>
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            aria-label="My Team"
+                        >
+                            <Tab label="Team Info" {...a11yProps(0)} />
+                            <Tab label="Github" {...a11yProps(1)} />
+                            <Tab label="GatherTown Space" {...a11yProps(2)} />
+                            <Tab label="Video Drive" {...a11yProps(3)} />
+                            <Tab label="Multi Sig Wallet" {...a11yProps(4)} />
+                            <Tab label="Project Management" {...a11yProps(5)} />
+                            <Tab label="Team Members" {...a11yProps(6)} />
+                            <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
+                            <Tab label="Team Fun" {...a11yProps(8)} />
+                        </Tabs>
+                        <TabPanel value={value} index={0}>
+                            <TeamMission teamData={teamData} />
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                            <TeamGithub teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                            <TeamGatherRoom teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={3}>
+                            <TeamVideoDrive teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={4}>
+                            <TeamMultiSigWallet teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={5}>
+                            <TeamProjectManagement teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={6}>
+                            <TeamMembers teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={7}>
+                            <TeamAcceptRejectInvitees teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={8}>
+                            <TeamFun teamData={teamData}  />
+                        </TabPanel>
+                    </Box>
+                )}
+                {/* <Footer /> */}
+            </main>
+        </>
+    );
 };
 
 export default MyTeam;
