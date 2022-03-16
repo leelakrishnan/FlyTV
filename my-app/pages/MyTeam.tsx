@@ -53,6 +53,9 @@ const MyTeam = () => {
     const [teamData, setTeamData] = useState({});
     const [teamLoaded, setTeamLoaded] = useState("not-loaded");
 
+
+    const {teamQueryId} = router.query;
+
     useEffect(() => {
         (async () => {
             if (user && user.id) {
@@ -73,7 +76,31 @@ const MyTeam = () => {
                             
                         });
                 }
-                await getTeamForUser(user.id);
+
+                // @ts-ignore
+                async function getTeamByTeamId(teamId: string) {
+                    const Team = Moralis.Object.extend("Team");
+                    const query = new Moralis.Query(Team);
+                    query.equalTo("objectId", teamId);
+                    query.find()
+                        .then(function (results: any) {
+                            if (results && results[0].id) {
+                                setTeamId(results[0].id);
+                                setTeamData(results[0]);
+                                setTeamLoaded("loaded");
+                            }
+                        })
+                        .catch(function (error) {
+
+                        });
+                }
+
+
+                if (teamQueryId) {
+                    await getTeamByTeamId(teamQueryId);
+                } else {
+                    await getTeamForUser(user.id);
+                }
                 setLoading("loaded");
             }
         })();
