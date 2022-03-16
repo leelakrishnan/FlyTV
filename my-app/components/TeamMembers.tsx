@@ -4,6 +4,11 @@ import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Moralis from "moralis";
+import Grid from "@mui/material/Grid";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 type Props = {
     teamData: any,
@@ -12,8 +17,12 @@ type Props = {
 const TeamMembers = ({ teamData }: Props)  => {
     const router = useRouter();
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     const [formValues, setFormValues] = useState({
-        repoName: ""
+        membersIds: [],
+        members:  []
     });
     const [formErrors, setFormErrors] = useState({});
     const [loading, setLoading] = useState(false);
@@ -21,9 +30,23 @@ const TeamMembers = ({ teamData }: Props)  => {
     const [loader, setLoader] = useState("not-loaded");
 
     useEffect(() => {
-        mapMoralisTeamToFormValues();
+        async function getMemberInfo(membersIds: string[]) {
+            const userQuery = new Moralis.Query(Moralis.User);
+            userQuery.containedIn("objectId",
+                membersIds);
+            const data = await userQuery.find({ useMasterKey: true });
+            debugger;
+            if (data) {
+                // @ts-ignore
+                formValues.members = data;
+            }
+        }
+        const memberIds = teamData?.get("users");
+        if (memberIds) {
+            formValues.membersIds = memberIds;
+            getMemberInfo(memberIds);
+        }
         setLoader("loaded");
-
     }, [user]);
 
     const formErrorStyle = {
@@ -31,13 +54,6 @@ const TeamMembers = ({ teamData }: Props)  => {
         fontSize: "1.2rem",
         paddingBottom: "0.5rem",
     };
-
-    function mapMoralisTeamToFormValues() {
-        const repoName = teamData?.get("repoName");
-
-        if (repoName)
-            formValues.repoName = repoName;
-    }
 
     // create a function which set the values of form field
     const handleOnChange = (e) => {
@@ -65,6 +81,10 @@ const TeamMembers = ({ teamData }: Props)  => {
         validateError();
         console.log("formValues", formValues);
         setLoading(true);
+
+
+
+
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
@@ -96,10 +116,18 @@ const TeamMembers = ({ teamData }: Props)  => {
                                 placeholder="Search And Add Team Member"
                             />
                         </div>
+                        <div className={styles.formGroups}>
+                            <input
+                                type="text"
+                                value={formValues.repoName}
+                                name={Object.keys(formValues)[0]}
+                                disabled={true}
+                            />
+                        </div>
                         {!loading ? (
                             <div className={styles.formGroups}>
                                 <button onClick={handleSubmit} className={styles.submit}>
-                                    Submit
+                                    Search And Add
                                 </button>
                             </div>
                         ) : (
