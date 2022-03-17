@@ -43,10 +43,11 @@ const Team: NextPage = () => {
             <div className="descriptions">
               At the entrance to many hackathons, we ask the question: <br />
               How many hackathons can you be in at once? Each Hackathon <br />
-              has Admin who can access to commit their terms and conditions
+              is different, so are the Admin who can access to commit their
+              terms and conditions
               <br />
-              main missions, and adjust the required profile fields and hoop
-              jumping.
+              main missions, and adjust the required profile fields and
+              milestones.
             </div>
             <div className={styles.container3}>
               <button

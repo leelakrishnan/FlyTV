@@ -233,12 +233,10 @@ const Team: NextPage = () => {
                 teamLoaded === "loaded" && (
                   <>
                     <div className="descriptions">
-                      Not entirely sure what the purpose of this screen is.{" "}
-                      <br /> Perhaps you are only seeing this because you
-                      already <br /> have a team. what would it be helpful to
-                      see here? <br /> "_ new messages 💌" <br /> or money
-                      waiting! <br />
-                      or current proposals needing Voting
+                      You are only seeing this page because you already <br />{" "}
+                      have a team. What would it be helpful to see here? <br />{" "}
+                      "_ new messages 💌" <br /> or money waiting <br />
+                      or current proposals needing voting? yes to all?
                     </div>
                     <button
                       className={styles.join}
@@ -252,6 +250,18 @@ const Team: NextPage = () => {
                 )}
               {loading == "loaded" && teamId === "" && teamLoaded === "loaded" && (
                 <>
+                  <div className="descriptions">
+                    {" "}
+                    You are only seeing this page because you don't have a team
+                    yet <br />
+                    This simple page is designed to streamline the process of
+                    getting a team together <br />
+                    we can programmatically require signing{" "}
+                    <a href="https://github.com/leelakrishnan/FlyTV/issues/58">
+                      Team Terms and Conditions
+                    </a>{" "}
+                    before joining a team
+                  </div>
                   <div className={styles.teamGroups}>
                     <select value={value} onChange={handleTeamCreateChange}>
                       <option value="1">I am looking for a team to join</option>

@@ -94,7 +94,10 @@ const TeamGithub = ({ teamData }: Props) => {
         We realized that not everybody knows where everything is <br />
         or at least, could waste time looking or asking for it. <br />
         And even more importantly than ever, we can track github activity and
-        verify!
+        verify! <br /> Check out this document we wrote about using{" "}
+        <a href="https://iodized-motorcycle-19d.notion.site/Github-Flow-for-Hackathons-e0d394f3a1e64757b04b7e045ca0970a">
+          GitHub for Hackathons
+        </a>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (
