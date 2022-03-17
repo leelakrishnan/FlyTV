@@ -19,6 +19,6 @@ Here are some sketches to get me warmed up<br>
 [RND Randy](https://ipfs.io/bafybeibdt2iiml5kmzllqiyruy5zzcjjmxqqczzmx7mudyyz5pnfmtzp2u)<br>
 [AI Droid](https://ipfs.io/bafybeifgjikfedbubmsgppikbl5fccdbjsgitsqgvbk6fhdhcajmrrfhb4)<br>
 [Crypto Enthusiast](https://ipfs.io/bafybeihx5iloylvzrynibxz77qlsnl44pxh6x3t6y333veikfdqngwwcka)<br>
-[Tokenomics Tommy](https://ipfs.io/)<br>
-[Lead Developer](https://ipfs.io/)<br>
-[Mystic Hacker](https://ipfs.io/)<br>
+[Tokenomics Tommy](https://ipfs.io/bafybeifocns76bdxzcb2xsro6hweou2d242lne7xuazrqqpnhveeaqxm7a)<br>
+[Lead Developer](https://ipfs.io/bafybeidl2fxdcublvkhtnjyorvdwktz4byyb57md22gcte6cgtgd7ijeme)<br>
+[Mystic Hacker](https://ipfs.io/bafybeibhekxlwe3eksmu6ooezlk7qjey256su4lziocjbytgdzm5j2mgrq)<br>
