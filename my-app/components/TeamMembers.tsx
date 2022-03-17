@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
 import Moralis from "moralis";
 import MaterialTable from "material-table";
+import ReactTooltip from "react-tooltip";
 type Props = {
   teamData: any;
 };
@@ -233,9 +234,10 @@ const TeamMembers = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        core feature, if you already have a friend in this hackathon. <br />
-        some people will want to come in with a team ready to go <br />
+      <div className={styles.pagetooltipTop}>
+        <a data-tip=' core feature, if you already have a friend in this hackathon.
+        some people will want to come in with a team ready to go '>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

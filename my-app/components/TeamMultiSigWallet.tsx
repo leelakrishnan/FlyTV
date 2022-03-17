@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -94,9 +95,10 @@ const TeamMultiSigWallet = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        apparently, according to our brainstorming, <br />
-        we think it would be cool to have a multisig wallet for stuff
+      <div className={styles.pagetooltip}>
+        <a data-tip='Apparently, according to our brainstorming,
+        we think it would be cool to have a multisig wallet for stuff'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

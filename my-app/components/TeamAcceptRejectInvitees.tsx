@@ -5,6 +5,7 @@ import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
 import MaterialTable from "material-table";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -91,11 +92,12 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        We needed a way for users without a team to apply for an invite to our
-        team <br />
+      <div className={styles.pagetooltipTop}>
+        <a data-tip='  We needed a way for users without a team to apply for an invite to our
+        team
         Here, the team can review and choose to extend an invitation (adding
-        them to the team!)
+        them to the team!) '>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

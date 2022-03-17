@@ -9,6 +9,7 @@ import { useMoralis } from "react-moralis";
 import Moralis from "moralis";
 import Loader from "../components/Loader";
 import MaterialTable from "material-table";
+import ReactTooltip from "react-tooltip";
 
 const Team: NextPage = () => {
   const router = useRouter();
@@ -38,17 +39,17 @@ const Team: NextPage = () => {
       </Head>
       <main>
         <Nav />
-        <div className={styles.hero}>
-          <div className={styles.container2} style={{ height: "500px" }}>
-            <div className="descriptions">
-              At the entrance to many hackathons, we ask the question: <br />
-              How many hackathons can you be in at once? Each Hackathon <br />
+        <div className={styles.pagetooltip}>
+          <a data-tip=' At the entrance to many hackathons, we ask the question:
+              How many hackathons can you be in at once? Each Hackathon
               is different, so are the Admin who can access to commit their
               terms and conditions
-              <br />
               main missions, and adjust the required profile fields and
-              milestones.
-            </div>
+              milestones.'>Help</a>
+          <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+        </div>
+        <div className={styles.hero}>
+          <div className={styles.container2} style={{ height: "500px" }}>
             <div className={styles.container3}>
               <button
                 className={styles.join}

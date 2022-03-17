@@ -5,6 +5,7 @@ import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
 import axios from "axios";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -118,6 +119,22 @@ const TeamGatherRoom = ({ teamData }: Props) => {
 
   return (
     <>
+      <div className={styles.pagetooltip}>
+        <a data-tip=' We had many hilarious times running in circles in gathertown 
+        or at least, a decent place to meet, where even with no video theres
+        still an avatar to relate to.  We all agreed on a system of "go to
+        our office when working on the project" (like, clock in, and be
+        available to help) 
+        using the gathertown API, should be able to verify each user spent time
+        there, 
+        but even more importantly, we chose this because while its fun,
+        something is missing. 
+        Ideally, we also have the hackathons API key passed in to us 
+        and can use the API to create a private room or passworded area in the
+        official gathertown as well
+        </a>'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+      </div>
       <div className={styles.container}>
         {loader == "loaded" && (
           <form className={styles.form}>
@@ -149,18 +166,7 @@ const TeamGatherRoom = ({ teamData }: Props) => {
         )}
       </div>
       <div className="descriptions">
-        We had many hilarious times running in circles in gathertown <br />
-        or at least, a decent place to meet, where even with no video theres
-        still an avatar to relate to. <br /> We all agreed on a system of "go to
-        our office when working on the project" (like, clock in, and be
-        available to help) <br />
-        using the gathertown API, should be able to verify each user spent time
-        there, <br />
-        but even more importantly, we chose this because while its fun,
-        something is missing. <br />
-        Ideally, we also have the hackathons API key passed in to us <br />
-        and can use the API to create a private room or passworded area in the
-        official gathertown as well
+       
       </div>
     </>
   );

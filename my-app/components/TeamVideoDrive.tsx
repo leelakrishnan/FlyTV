@@ -12,6 +12,7 @@ import {
   useWeb3ExecuteFunction,
 } from "react-moralis";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 type Props = {
   teamData: any;
 };
@@ -120,12 +121,12 @@ const TeamVideoDrive = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        where was that video of us running in circles? ----- flytv one stop shop
+      <div className={styles.pagetooltip}>
+        <a data-tip=' where was that video of us running in circles? ----- flytv one stop shop
         -----
-        <br />
         with the goal of being a team dashboard, collecting all the videos is a
-        no brainer. <br />
+        no brainer.'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

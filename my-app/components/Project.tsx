@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useChecklist } from "react-checklist";
 import styles from "../styles/Form.module.css";
 import { useMoralis } from "react-moralis";
+import ReactTooltip from "react-tooltip";
 
 const data = [
   { _id: 1, label: "warm up" },
@@ -44,11 +45,12 @@ const TeamProject = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        If our project manager(s) had this checklist before we broke the ice on
-        our first meeting, <br /> we could have flown further, faster and had
-        time <br /> for more fun. Next hackathon will use this app and checking
-        boxes to achieve the goal <br />
+      <div className={styles.pagetooltip}>
+        <a data-tip='   If our project manager(s) had this checklist before we broke the ice on
+        our first meeting, we could have flown further, faster and had
+        time for more fun. Next hackathon will use this app and checking
+        boxes to achieve the goal'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (
