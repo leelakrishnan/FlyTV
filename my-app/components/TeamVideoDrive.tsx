@@ -120,6 +120,13 @@ const TeamVideoDrive = ({ teamData }: Props) => {
 
   return (
     <>
+      <div className="descriptions">
+        where was that video of us running in circles? ----- flytv one stop shop
+        -----
+        <br />
+        with the goal of being a team dashboard, collecting all the videos is a
+        no brainer. <br />
+      </div>
       <div className={styles.container}>
         {loader == "loaded" && (
           <form className={styles.form}>
