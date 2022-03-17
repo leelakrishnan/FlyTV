@@ -1,27 +1,24 @@
 # Archetype Sketches
 
-hosted on ipfs
-
-[
-  {
-    "path": "sucker.png",
-    "hash": "QmWd81mWRVT5w8vLdd8hw2WSDfVFtQ3N3ZcU9qdsN2juU1",
-    "size": 663859
-  },
-  {
-    "path": "BookNerd.png",
-    "hash": "QmQvq7sajJ6VYmmpKYGqDJP2fF4ruGCb9xmo4aSUxRqKNH",
-    "size": 2177534
-  },
-  {
-    "path": "worryer.png",
-    "hash": "QmQZQPHxTsr9DZ2JLMEKUL8RZdmGVDR84gqioavCyJEF3E",
-    "size": 2433003
-  },
-  {
-    "path": "Vaper.png",
-    "hash": "QmdgQ6HrhKYh2eVtEDNQ13mNPLvtpqhFkdsdE1bm45C8xQ",
-    "size": 2301259
-  }
-]
-[worryer](https://ipfs.io/ipfs/bafybeiba7o5e4d3egcmakswxwobg36xprckw55s4yqijfryrwxxg7zyx2e/)
+Here are some sketches to get me warmed up
+[Sucker](https://ipfs.io/ipfs/bafybeigyr2oacxcb7ffvoisrfb2tid4u7zzhym3ulkh6laixj4hmf4pzau)
+[Vaper](https://ipfs.io/ipfs/bafybeidf3q2xinbfv5ecoxffosliag3n44zax7dbfz4sye5uldtynq7uue)
+[Worryer](https://ipfs.io/bafybeifqkcwtaxasrxapjlq6ovbrietwp26yfumhxgcoq2wkwjudflxsye)
+[Book Hoodie](https://ipfs.io/bafybeicg3noennhgwjepstuusxhfo2aigursmq7tdlkwijwln5e5ttos4m)
+[Goddess](https://ipfs.io/bafybeidd7syfuwaarddndz6wvwzanbjqqwbry5pqfc3l5kwuxtd75xneoq)
+[Librarian](https://ipfs.io/bafybeibi4xdec4xxy27pbhdcqn5ntvl2wi6qzjcoe4wpuewojjpwa7yuie)
+[Committer](https://ipfs.io/bafybeihponuvg6qk2vuna3icnwonnkufzddhj5hfpwxrbdbefnsiqadbhe)
+[Jolly Pugalist](https://ipfs.io/bafybeidztsjtlpxuya4exc4vyhqnxxncmsoeprrrd5wo4rkijhyr5rxr2y)
+[Product Mgr](https://ipfs.io/bafybeia7sq2hddrgeczaqhkxabkjbr2e5gfyt6ntn5trbxrwhzhu55dfkq)
+[Web3 Teacher](https://ipfs.io/bafybeiaz6vu66ko4qeeapors2ldv7qs7qynl2upaqy6lvnp5wiuqonapku)
+[Documentarian](https://ipfs.io/bafybeidm3jer3h2bflgykurcbtuxoplgswvgmvkbtri3cw5lem3j352hcu)
+[Project Mgr](https://ipfs.io/bafybeibbbuatg37nerjc74xke7lxn2ofzhl4yo7cpinyik7iajt46s7bua)
+[IPFS Space Cadet](https://ipfs.io/bafybeih4oxzw7zfgpokhfk3amxhkkkxkn54xow4uwskdb2nhgnfqqmvbbq)
+[Gardener](https://ipfs.io/bafybeicxpy24ohveaskaby6zzirg2a5s74csg4dkiqxue36cbnjwyupal4)
+[Aang](https://ipfs.io/bafybeihxazgvkvu5ql6xy67usboq5t2eb4mntqqmjxbcl3vppaenxtcgb4)
+[RND Randy](https://ipfs.io/bafybeibdt2iiml5kmzllqiyruy5zzcjjmxqqczzmx7mudyyz5pnfmtzp2u)
+[AI Droid](https://ipfs.io/bafybeifgjikfedbubmsgppikbl5fccdbjsgitsqgvbk6fhdhcajmrrfhb4)
+[Crypto Enthusiast](https://ipfs.io/bafybeihx5iloylvzrynibxz77qlsnl44pxh6x3t6y333veikfdqngwwcka)
+[Tokenomics Tommy](https://ipfs.io/)
+[Lead Developer](https://ipfs.io/)
+[Mystic Hacker](https://ipfs.io/)
