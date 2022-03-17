@@ -52,6 +52,8 @@ const TeamDAO = ({ teamData }: Props)  => {
     const [tokenAmount, setTokenAmount] = useState(zero);
     // tokensMinted is the total number of tokens that have been minted till now out of 10000(max total supply)
     const [tokensMinted, setTokensMinted] = useState(zero);
+    const [tokensClaimed, setTokensClaimed] = useState(0);
+
     const [showClaims, setShowClaims] = useState("dontshow");
 
     // ETH Balance of the DAO contract
@@ -305,6 +307,7 @@ const TeamDAO = ({ teamData }: Props)  => {
                 getDAOTreasuryBalance();
                 getUserNFTBalance();
                 getNumProposalsInDAO();
+                getTotalTokensMinted();
             }
         } catch (err) {
             console.error(err);
@@ -421,7 +424,9 @@ const TeamDAO = ({ teamData }: Props)  => {
             );
             // Get all the tokens that have been minted
             const _tokensMinted = await tokenContract.totalSupply();
+            debugger;
             setTokensMinted(_tokensMinted);
+            setTokensClaimed(BigNumber.from(_tokensMinted));
         } catch (err) {
             console.error(err);
         }
@@ -791,7 +796,7 @@ const TeamDAO = ({ teamData }: Props)  => {
                                 </button>
                             </div>
                         }
-                        {presaleStarted && showClaims === "dontshow" &&
+                        {presaleStarted && nftBalance <= 0  &&
                             <div className={styles.formGroups}>
                                 <button className={styles.submit} onClick={mintBuilderNFT}>
                                     Mint Your Builder NFT!
@@ -799,7 +804,7 @@ const TeamDAO = ({ teamData }: Props)  => {
                             </div>
                         }
                         {/* ToDo: show this after Mint Button is there */}
-                        {presaleStarted && showClaims === "show" && tokensToBeClaimed.toNumber() > 0 &&
+                        {presaleStarted && nftBalance >= 0 && tokensToBeClaimed.toNumber() > 0 &&
                             <div className={styles.formGroups}>
                                 <div className={styles.description}>
                                     {tokensToBeClaimed.toNumber() * 100} Tokens can be claimed!
@@ -808,19 +813,17 @@ const TeamDAO = ({ teamData }: Props)  => {
                                     Claim Tokens
                                 </button>
                             </div>}
-                        {presaleStarted && showClaims === "show" &&
-                            <div className={styles.formGroups}>
-                                <div className={styles.description}>
-                                    Your FlyTV NFT Balance: {nftBalance}
-                                    <br/>
-                                    Treasury Balance: {formatEther(treasuryBalance)} ETH
-                                    <br/>
-                                    Total Number of Proposals: {numProposals}
-                                </div>
-                            </div>
-                        }
-                        {presaleStarted && showClaims === "show" &&
+                        {presaleStarted && tokensClaimed > 0 &&
                             <>
+                                <div className={styles.formGroups}>
+                                    <div className={styles.description}>
+                                        Your FlyTV NFT Balance: {nftBalance}
+                                        <br/>
+                                        Treasury Balance: {formatEther(treasuryBalance)} ETH
+                                        <br/>
+                                        Total Number of Proposals: {numProposals}
+                                    </div>
+                                </div>
                                 <div className={styles.formGroups}>
                                     <button
                                         className={styles.submit}
