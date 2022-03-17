@@ -36,7 +36,6 @@ nav {
   margin: auto;
   max-width: 1500px;
   font-family: "Press Start 2P";
-
 }
 
 nav > a {
@@ -120,7 +119,6 @@ footer {
   color: #0e0d0d;
 }
 
-
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
   color: white !important;
 }
@@ -128,10 +126,8 @@ footer {
   color: red !important;
 }
 .rmsc.dropdown-container {
-  background-color: black !important;;
+  background-color: black !important;
 }
-
-
 
 .meme {
   position: relative;
@@ -155,16 +151,9 @@ footer {
   text-transform: uppercase;
   color: white;
   letter-spacing: 1px;
-  text-shadow:
-          2px 2px 0 #000,
-          -2px -2px 0 #000,
-          2px -2px 0 #000,
-          -2px 2px 0 #000,
-          0 2px 0 #000,
-          2px 0 0 #000,
-          0 -2px 0 #000,
-          -2px 0 0 #000,
-          2px 2px 5px #000;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
+    -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
+    2px 2px 5px #000;
 }
 
 .bottom {
@@ -177,11 +166,10 @@ footer {
 
 .MuiButtonBase-root {
   padding: 12px 16px !important;
-  padding-top: 12px  !important;
-  padding-right: 16px  !important;
-  padding-bottom: 12px  !important;
-  padding-left: 16px  !important;
-
+  padding-top: 12px !important;
+  padding-right: 16px !important;
+  padding-bottom: 12px !important;
+  padding-left: 16px !important;
 }
 
 .MuiIconButton-label {
@@ -193,4 +181,16 @@ footer {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+}
+
+.descriptions {
+  padding-top: 30px;
+  font-family: impact, sans-serif;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
+    -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
+    2px 2px 5px #000;
 }

@@ -1,11 +1,11 @@
 // this component is to create an example of a hardcoded but easily modifiable react-checklist
-// checklist for team project management.
+// checklist for team project management, doubled down on documentation thanks to Brian
 // correct sequence obtained thanks to Shomari
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import { useChecklist } from "react-checklist";
 import styles from "../styles/Form.module.css";
-import {useMoralis} from "react-moralis";
+import { useMoralis } from "react-moralis";
 
 const data = [
   { _id: 1, label: "warm up" },
@@ -25,61 +25,66 @@ const data = [
 ];
 
 type Props = {
-  teamData: any,
-}
+  teamData: any;
+};
 
-const TeamProject = ({ teamData }: Props)  => {
-
-  const {handleCheck, isCheckedAll, checkedItems} = useChecklist(data, {
+const TeamProject = ({ teamData }: Props) => {
+  const { handleCheck, isCheckedAll, checkedItems } = useChecklist(data, {
     key: "_id",
     keyType: "number",
   });
   const [loading, setLoading] = useState(false);
-  const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
+  const { user, setUserData, userError, isUserUpdating, refetchUserData } =
+    useMoralis();
   const [loader, setLoader] = useState("not-loaded");
 
   useEffect(() => {
     setLoader("loaded");
-
   }, [user]);
 
   return (
-      <>
-        <div className={styles.container}>
-          {loader == "loaded" &&
-              <>
-                <form className={styles.form}>
-                  <h1>Project Man 💸 Checklist</h1>
-                  <div className={styles.formGroups}>
-                    <ul>
-                      <li>
-                        <input
-                            type="checkbox"
-                            onChange={handleCheck} // 1
-                            checked={isCheckedAll} // 2
-                        />
-                        <label>Check All</label>
-                      </li>
+    <>
+      <div className="descriptions">
+        If our project manager(s) had this checklist before we broke the ice on
+        our first meeting, <br /> we could have flown further, faster and had
+        time <br /> for more fun. Next hackathon will use this app and checking
+        boxes to achieve the goal <br />
+      </div>
+      <div className={styles.container}>
+        {loader == "loaded" && (
+          <>
+            <form className={styles.form}>
+              <h1>Project Man 💸 Checklist</h1>
+              <div className={styles.formGroups}>
+                <ul>
+                  <li>
+                    <input
+                      type="checkbox"
+                      onChange={handleCheck} // 1
+                      checked={isCheckedAll} // 2
+                    />
+                    <label>Check All</label>
+                  </li>
 
-                      {data.map((v, i) => (
-                          <li key={i}>
-                            <input
-                                type="checkbox"
-                                data-key={v._id} // 3
-                                onChange={handleCheck} // 4
-                                checked={checkedItems.has(v._id)} // 5
-                            />
-                            <label>{v.label}</label>
-                          </li>
-                      ))}
-                    </ul>
-                  </div>
-                </form>
-              </>
-          }
-        </div>
-      </>
+                  {data.map((v, i) => (
+                    <li key={i}>
+                      <input
+                        type="checkbox"
+                        data-key={v._id} // 3
+                        onChange={handleCheck} // 4
+                        checked={checkedItems.has(v._id)} // 5
+                      />
+                      <label>{v.label}</label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </>
   );
-}
+};
 
 export default TeamProject;

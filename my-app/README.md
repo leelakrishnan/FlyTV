@@ -1,3 +1,13 @@
+# FLYTV Documentation tips:
+
+The most important thing you need to know is we chose to have improved documentation for and from Lead Developer Leela.
+
+1. The first feature is web3 authorization. We used web3auth because makes it easier and more accessible for anyone to log into our application.
+2. What happens if you log in with google and then try using your metamask to join? Try and find out!
+3. don't forget to npm install if someone recently introduced new modules to the project :)
+4. how many hours would it take to have something as comprehensive and amazing as https://docs.chain.link/docs/contributing-to-chainlink/ ??!
+5. strangers, waiting.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
