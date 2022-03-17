@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {useMoralis} from "react-moralis";
 import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
@@ -9,6 +9,7 @@ import {BigNumber, providers, Contract, utils} from "ethers";
 import { WHITELIST_CONTRACT_ADDRESS, WHITELIST_ABI, NFT_CONTRACT_ADDRESS, NFT_ABI,
     TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, FAKE_NFT_MARKETPLACE_ADDRESS, FAKE_NFT_ABI,
     DAO_CONTRACT_ADDRESS, DAO_CONTRACT_ABI } from "../constants";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
     teamData: any,
@@ -77,7 +78,7 @@ const TeamDAO = ({ teamData }: Props)  => {
             const balance = await provider.getBalance(
                 DAO_CONTRACT_ADDRESS
             );
-            
+
             setTreasuryBalance(balance.toString());
         } catch (error) {
             console.error(error);
@@ -132,11 +133,11 @@ const TeamDAO = ({ teamData }: Props)  => {
     // and converts the returned data into a Javascript object with values we can use
     const fetchProposalById = async (id) => {
         try {
-            debugger;
+
             const provider = await getProviderOrSigner();
             const daoContract = getDaoContractInstance(provider);
             const proposal = await daoContract.proposals(id);
-            debugger;
+
             const parsedProposal = {
                 proposalId: id,
                 featureRequest: proposal.featureRequest,
@@ -145,7 +146,7 @@ const TeamDAO = ({ teamData }: Props)  => {
                 nayVotes: proposal.nayVotes.toString(),
                 executed: proposal.executed,
             };
-            debugger;
+
             return parsedProposal;
         } catch (error) {
             console.error(error);
@@ -157,16 +158,16 @@ const TeamDAO = ({ teamData }: Props)  => {
     const fetchAllProposals = async () => {
         try {
             const proposals = [];
-            debugger;
+
             for (let i = 0; i < numProposals; i++) {
-                debugger;
+
 
                 const proposal = await fetchProposalById(i);
-                debugger;
+
 
                 proposals.push(proposal);
             }
-            debugger;
+
             setProposals(proposals);
             return proposals;
         } catch (error) {
@@ -260,7 +261,7 @@ const TeamDAO = ({ teamData }: Props)  => {
         try {
             // Get the provider from web3Modal, which in our case is MetaMask
             // No need for the Signer here, as we are only reading state from the blockchain
-            
+
             const provider = await getProviderOrSigner();
             // Create an instance of NFT Contract
             const nftContract = new Contract(
@@ -281,11 +282,11 @@ const TeamDAO = ({ teamData }: Props)  => {
             // call the balanceOf from the NFT contract to get the number of NFT's held by the user
             const balance = await nftContract.balanceOf(address);
             // balance is a Big number and thus we would compare it with Big number `zero`
-            
+
             if (balance === zero) {
                 setTokensToBeClaimed(zero);
             } else {
-                
+
                 setShowClaims("show");
                 // amount keeps track of the number of unclaimed tokens
                 var amount = 0;
@@ -424,7 +425,7 @@ const TeamDAO = ({ teamData }: Props)  => {
             );
             // Get all the tokens that have been minted
             const _tokensMinted = await tokenContract.totalSupply();
-            debugger;
+
             setTokensMinted(_tokensMinted);
             setTokensClaimed(BigNumber.from(_tokensMinted));
         } catch (err) {
@@ -546,7 +547,7 @@ const TeamDAO = ({ teamData }: Props)  => {
     const mintBuilderNFT = async (e) => {
         e.preventDefault();
         try {
-            
+
             // We need a Signer here since this is a 'write' transaction.
             const signer = await getProviderOrSigner(true);
             // Create a new instance of the Contract with a Signer, which allows
@@ -796,7 +797,7 @@ const TeamDAO = ({ teamData }: Props)  => {
                                 </button>
                             </div>
                         }
-                        {presaleStarted && nftBalance <= 0  &&
+                        {presaleStarted && nftBalance <= 0 &&
                             <div className={styles.formGroups}>
                                 <button className={styles.submit} onClick={mintBuilderNFT}>
                                     Mint Your Builder NFT!
@@ -866,13 +867,20 @@ const TeamDAO = ({ teamData }: Props)  => {
     };
 
     return (
-        <div className={styles.container}>
-            {loader == "loaded" &&
-                <form className={styles.form}>
-                    {renderButton()}
-                </form>
-            }
-        </div>
+        <>
+            <div className={styles.pagetooltip}>
+                <a data-tip='Fill me'>Help</a>
+                <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+            </div>
+            <div className={styles.container}>
+                {loader == "loaded" &&
+                    <form className={styles.form}>
+                        {renderButton()}
+                    </form>
+                }
+            </div>
+
+        </>
     );
 }
 export default TeamDAO;

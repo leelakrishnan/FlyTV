@@ -607,3 +607,8 @@
   justify-content: center;
   padding: 20px;
 }
+
+
+.pagetooltip {
+  position:fixed;bottom:2em;right:1em;
+}

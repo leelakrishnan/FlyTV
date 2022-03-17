@@ -5,6 +5,7 @@ import { MultiSelect } from "react-multi-select-component";
 import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 const options = [
   { label: "HTML/CSS", value: "HTML/CSS" },
@@ -213,8 +214,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className="descriptions">
-        The main problem is that Hackathon participants have to reinvent the
+      <div className={styles.pagetooltip}>
+        <a data-tip=' The main problem is that Hackathon Participants have to reinvent the
         wheel every time they join a team or a hackathon. Our solution is that
         we create a profile that can be shown to potential teammates when
         applying for a team and used to enter hackathons. One task waiting for
@@ -232,7 +233,8 @@ const Profile = () => {
           amazing notion tippi wrote about github flow for hackathons
         </a>{" "}
         and leave a comment for 1 point <br />
-        meanwhile the skills checklist is still light grey on white background.
+        meanwhile the skills checklist is still light grey on white background.'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <p style={postTitle}>Profile</p>
       <div className={styles.container}>

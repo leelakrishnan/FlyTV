@@ -200,3 +200,25 @@
 .formGroups > ul {
   list-style-type: none;
 }
+
+
+.pagetooltip {
+  position:fixed;
+  bottom:2em;
+  right:7em;
+  font-size:2.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pagetooltipTop {
+  position:fixed;
+  right:7em;
+  font-size:2.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
