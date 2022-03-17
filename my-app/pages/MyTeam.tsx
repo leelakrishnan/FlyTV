@@ -19,6 +19,8 @@ import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
 import TeamFun from "../components/TeamFun";
 import Project from "../components/Project";
+import TeamDAO from "../components/TeamDao";
+import TeamProjectBlobAsNFT from "../components/TeamProjectBlobAsNFT";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -144,7 +146,9 @@ const MyTeam = () => {
                             <Tab label="Team Members" {...a11yProps(6)} />
                             <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
                             <Tab label="Project Man" {...a11yProps(8)} />
-                            <Tab label="Team Fun" {...a11yProps(9)} />
+                            <Tab label="Mint Project" {...a11yProps(9)} />
+                            <Tab label="DAO" {...a11yProps(10)} />
+                            <Tab label="Fun" {...a11yProps(11)} />
                         </Tabs>
                         <TabPanel value={value} index={0}>
                             <TeamMission teamData={teamData} />
@@ -174,6 +178,12 @@ const MyTeam = () => {
                             <Project teamData={teamData}  />
                         </TabPanel>
                         <TabPanel value={value} index={9}>
+                            <TeamProjectBlobAsNFT teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={10}>
+                            <TeamDAO teamData={teamData}  />
+                        </TabPanel>
+                        <TabPanel value={value} index={11}>
                             <TeamFun teamData={teamData}  />
                         </TabPanel>
                     </Box>
