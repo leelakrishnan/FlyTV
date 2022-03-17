@@ -9,17 +9,18 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
-import Profile from "../components/Profile";
 import TeamMission from "../components/TeamMission";
 import TeamGithub from "../components/TeamGithub";
 import TeamGatherRoom from "../components/TeamGatherRoom";
 import TeamAcceptRejectInvitees from "../components/TeamAcceptRejectInvitees";
 import TeamVideoDrive from "../components/TeamVideoDrive";
-import styles from "../styles/Home.module.css";
 import TeamMultiSigWallet from "../components/TeamMultiSigWallet";
 import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
-import TeamTodo from "../components/TeamTodo";
+import TeamFun from "../components/TeamFun";
+import Project from "../components/Project";
+import TeamDAO from "../components/TeamDao";
+import TeamProjectBlobAsNFT from "../components/TeamProjectBlobAsNFT";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,6 +58,8 @@ const MyTeam = () => {
   const [teamData, setTeamData] = useState({});
   const [teamLoaded, setTeamLoaded] = useState("not-loaded");
 
+  const { teamQueryId } = router.query;
+
   useEffect(() => {
     (async () => {
       if (user && user.id) {
@@ -74,11 +77,31 @@ const MyTeam = () => {
                 setTeamLoaded("loaded");
               }
             })
-            .catch(function (error) {
-              debugger;
-            });
+            .catch(function (error) {});
         }
-        await getTeamForUser(user.id);
+
+        // @ts-ignore
+        async function getTeamByTeamId(teamId: string) {
+          const Team = Moralis.Object.extend("Team");
+          const query = new Moralis.Query(Team);
+          query.equalTo("objectId", teamId);
+          query
+            .find()
+            .then(function (results: any) {
+              if (results && results[0].id) {
+                setTeamId(results[0].id);
+                setTeamData(results[0]);
+                setTeamLoaded("loaded");
+              }
+            })
+            .catch(function (error) {});
+        }
+
+        if (teamQueryId) {
+          await getTeamByTeamId(teamQueryId);
+        } else {
+          await getTeamForUser(user.id);
+        }
         setLoading("loaded");
       }
     })();
@@ -88,24 +111,6 @@ const MyTeam = () => {
 
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
-  };
-
-  const handleTeamMission = async (values: any) => {
-    try {
-      debugger;
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(values);
-  };
-
-  const handleGitHub = async (values: any) => {
-    try {
-      debugger;
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(values);
   };
 
   // @ts-ignore
@@ -134,6 +139,10 @@ const MyTeam = () => {
                 <Tab label="Project Management" {...a11yProps(5)} />
                 <Tab label="Team Members" {...a11yProps(6)} />
                 <Tab label="Accept Reject Invitees" {...a11yProps(7)} />
+                <Tab label="Project Man" {...a11yProps(8)} />
+                <Tab label="Mint Project" {...a11yProps(9)} />
+                <Tab label="DAO" {...a11yProps(10)} />
+                <Tab label="Fun" {...a11yProps(11)} />
               </Tabs>
               <TabPanel value={value} index={0}>
                 <TeamMission teamData={teamData} />
@@ -158,6 +167,18 @@ const MyTeam = () => {
               </TabPanel>
               <TabPanel value={value} index={7}>
                 <TeamAcceptRejectInvitees teamData={teamData} />
+              </TabPanel>
+              <TabPanel value={value} index={8}>
+                <Project teamData={teamData} />
+              </TabPanel>
+              <TabPanel value={value} index={9}>
+                <TeamProjectBlobAsNFT teamData={teamData} />
+              </TabPanel>
+              <TabPanel value={value} index={10}>
+                <TeamDAO teamData={teamData} />
+              </TabPanel>
+              <TabPanel value={value} index={11}>
+                <TeamFun teamData={teamData} />
               </TabPanel>
             </Box>
           )

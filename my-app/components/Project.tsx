@@ -1,9 +1,11 @@
 // this component is to create an example of a hardcoded but easily modifiable react-checklist
 // checklist for team project management, doubled down on documentation thanks to Brian
 // correct sequence obtained thanks to Shomari
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import { useChecklist } from "react-checklist";
+import styles from "../styles/Form.module.css";
+import {useMoralis} from "react-moralis";
 
 const data = [
   { _id: 1, label: "warm up" },
@@ -22,51 +24,62 @@ const data = [
   { _id: 14, label: "Submitted Final Project!!!!!!!!!!!!!!!!!!!!!!!!!!" },
 ];
 
-function Project() {
-  const { handleCheck, isCheckedAll, checkedItems } = useChecklist(data, {
+type Props = {
+  teamData: any,
+}
+
+const TeamProject = ({ teamData }: Props)  => {
+
+  const {handleCheck, isCheckedAll, checkedItems} = useChecklist(data, {
     key: "_id",
     keyType: "number",
   });
+  const [loading, setLoading] = useState(false);
+  const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
+  const [loader, setLoader] = useState("not-loaded");
 
-  // console.log(checkedItems); // Set(0) - handling with Set
-  // console.log([...checkedItems]); // []     - handling with Array
+  useEffect(() => {
+    setLoader("loaded");
+
+  }, [user]);
+
   return (
-    <div>
-      <h1>Project Man 💸 Checklist</h1>
-      <h2>Using react-checklist in the component?</h2>
-      <ul>
-        <li>
-          <input
-            type="checkbox"
-            onChange={handleCheck} // 1
-            checked={isCheckedAll} // 2
-          />
-          <label>Check All</label>
-        </li>
+      <>
+        <div className={styles.container}>
+          {loader == "loaded" &&
+              <>
+                <form className={styles.form}>
+                  <h1>Project Man 💸 Checklist</h1>
+                  <div className={styles.formGroups}>
+                    <ul>
+                      <li>
+                        <input
+                            type="checkbox"
+                            onChange={handleCheck} // 1
+                            checked={isCheckedAll} // 2
+                        />
+                        <label>Check All</label>
+                      </li>
 
-        {data.map((v, i) => (
-          <li key={i}>
-            <input
-              type="checkbox"
-              data-key={v._id} // 3
-              onChange={handleCheck} // 4
-              checked={checkedItems.has(v._id)} // 5
-            />
-            <label>{v.label}</label>
-          </li>
-        ))}
-      </ul>
-    </div>
+                      {data.map((v, i) => (
+                          <li key={i}>
+                            <input
+                                type="checkbox"
+                                data-key={v._id} // 3
+                                onChange={handleCheck} // 4
+                                checked={checkedItems.has(v._id)} // 5
+                            />
+                            <label>{v.label}</label>
+                          </li>
+                      ))}
+                    </ul>
+                  </div>
+                </form>
+              </>
+          }
+        </div>
+      </>
   );
 }
 
-// function Project() {
-//   return (
-//     <div>
-//       <h1>Project Man 💸 Checklist</h1>
-//       <h2>Using react-checklist in the component?</h2>
-//     </div>
-//   );
-// }
-
-export default Project;
+export default TeamProject;

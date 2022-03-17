@@ -52,7 +52,7 @@ const TeamProjectManagement = ({ teamData }: Props)  => {
     };
 
     function incrementBadge() {
-        debugger;
+        
         const projectManagementUrl = teamData?.get("projectManagementUrl");
         if (projectManagementUrl) {
         } else {

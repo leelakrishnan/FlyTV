@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { MultiSelect } from "react-multi-select-component";
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
+import Moralis from "moralis";
 
 const options = [
   { label: "HTML/CSS", value: "HTML/CSS" },
@@ -58,13 +59,35 @@ const Profile = () => {
     paddingBottom: "0.5rem",
   };
 
+  const {profileId} = router.query;
+
   useEffect(() => {
-    mapMoralisUserInfoToFormValues();
+    if (profileId) {
+      loadProfileByProfileId(profileId);
+    } else {
+      mapMoralisUserInfoToFormValues(user);
+    }
   }, [user]);
 
-  function mapMoralisUserInfoToFormValues() {
+  function loadProfileByProfileId(profileId: string) {
+    async function getMemberInfo(profileId: string) {
+      const userQuery = new Moralis.Query(Moralis.User);
+      userQuery.equalTo("objectId",
+          profileId);
+      const data = await userQuery.find({useMasterKey: true});
+      if (data && data.length > 0 && data[0].id) {
+        mapMoralisUserInfoToFormValues(data[0]);
+      }
+    }
+    if (profileId) {
+      getMemberInfo(profileId).then((value) => {
+      });
+    }
+  }
 
+  function mapMoralisUserInfoToFormValues(user: any) {
     const email = user?.get("email");
+    const emailAddress = user?.get("emailAddress");
     const userName = user?.get("username");
     const firstName = user?.get("firstName");
     const lastName = user?.get("lastName");
@@ -80,8 +103,12 @@ const Profile = () => {
     const skills = user?.get("skills");
     const level = user?.get("level");
 
-    if (email)
+    if (email) {
       formValues.email = email;
+    } else if (emailAddress) {
+      formValues.email = emailAddress;
+    }
+
     if (userName)
       formValues.userName = userName;
     if (firstName)
@@ -158,6 +185,7 @@ const Profile = () => {
 
     setUserData({
       email: formValues.email === "" ? undefined : formValues.email,
+      emailAddress: formValues.email === "" ? undefined : formValues.email,
       firstName: formValues.firstName === "" ? undefined : formValues.firstName,
       lastName: formValues.lastName === "" ? undefined : formValues.lastName,
       company: formValues.company === "" ? undefined : formValues.company,
@@ -171,11 +199,18 @@ const Profile = () => {
       skills: selectedSkill.length === 0 ? undefined : JSON.stringify(selectedSkill),
       level: selectedLevel === "" ? undefined : selectedLevel,
       badges: badges
-    })
+    });
+    const UserObj = Moralis.Object.extend("User");
+    const publicUser = new UserObj();
+    const postACL = new Moralis.ACL(Moralis.User.current());
+    postACL.setPublicReadAccess(true);
+    publicUser.set("id", user.id);
+    publicUser.setACL(postACL);
+    publicUser.save();
     toast.success(" Profile Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
-    router.push('/Team');
+    router.push('/Hackathon');
     setLoading(false);
   };
 
