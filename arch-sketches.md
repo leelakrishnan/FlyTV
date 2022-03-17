@@ -3,7 +3,7 @@
 Here are some sketches to get me warmed up<br>
 [Sucker](https://ipfs.io/ipfs/bafybeigyr2oacxcb7ffvoisrfb2tid4u7zzhym3ulkh6laixj4hmf4pzau)<br>
 [Vaper](https://ipfs.io/ipfs/bafybeidf3q2xinbfv5ecoxffosliag3n44zax7dbfz4sye5uldtynq7uue)<br>
-[Worryer](https://ipfs.io/bafybeifqkcwtaxasrxapjlq6ovbrietwp26yfumhxgcoq2wkwjudflxsye)<br>
+[Worryer](https://ipfs.io/ipfs/bafybeifqkcwtaxasrxapjlq6ovbrietwp26yfumhxgcoq2wkwjudflxsye)<br>
 [Book Hoodie](https://ipfs.io/ipfs/bafybeicg3noennhgwjepstuusxhfo2aigursmq7tdlkwijwln5e5ttos4m)<br>
 [Goddess](https://ipfs.io/ipfs/bafybeidd7syfuwaarddndz6wvwzanbjqqwbry5pqfc3l5kwuxtd75xneoq)<br>
 [Librarian](https://ipfs.io/ipfs/bafybeibi4xdec4xxy27pbhdcqn5ntvl2wi6qzjcoe4wpuewojjpwa7yuie)<br>
