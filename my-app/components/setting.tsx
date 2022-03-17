@@ -5,7 +5,12 @@ import Head from "next/head";
 const Setting = () => {
   const { provider, login } = useWeb3Auth();
 
-  const loggedInView = <></>;
+  const loggedInView = (
+    <>
+      Home for Hackathon. <br />
+      🛗 Team ✅ Vote ✌🏽 Fly 🚀
+    </>
+  );
 
   const unloggedInView = (
     <>
@@ -18,9 +23,8 @@ const Setting = () => {
           <div className={styles.header}>
             <h1> FlyTV</h1>
             <p className={styles.about}>
-              Ride the Rocket <br />
-              Home for Hackathon. <br />
-              🚀 Fly 🛗 Team ✅ V ✌🏽
+              Ride the Rocket of Technology: Web3 Home for Hackathon. <br />
+              🛗 Team ✅ Vote ✌🏽 Fly 🚀
             </p>
           </div>
           <button onClick={login} className={styles.join}>

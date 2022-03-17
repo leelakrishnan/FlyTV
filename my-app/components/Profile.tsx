@@ -214,18 +214,24 @@ const Profile = () => {
   return (
     <>
       <div className="descriptions">
-        The profile can be broken into user friendly step by step chunks <br />
+        The main problem is that Hackathon Participants have to reinvent the
+        wheel every time they join a team or a hackathon. Our solution is that
+        we create a profile that can be shown to potential teammates when
+        applying for a team and used to enter hackathons. One task waiting for
+        contributors to attack is breaking this profile into user-friendly step
+        by step chunks <br />
         only some fields will be required for each hackathon to have successful
         project <br />
-        some of this data is useful for applying for a team <br />
-        Jillian showed me a version where she fixed the skills css, but never
-        pushed her changes <br />
-        she should probably read the
+        We require a GitHub for everyone and an email, so we can communicate.{" "}
+        <br />
+        _____ showed me a version where they fixed the skills CSS, but never
+        pushed the changes, effort wasted? <br />
+        Everyone should probably read the
         <a href="https://www.notion.so/Github-Flow-for-Hackathons-e0d394f3a1e64757b04b7e045ca0970a">
           {" "}
           amazing notion tippi wrote about github flow for hackathons
         </a>{" "}
-        <br />
+        and leave a comment for 1 point <br />
         meanwhile the skills checklist is still light grey on white background.
       </div>
       <p style={postTitle}>Profile</p>
