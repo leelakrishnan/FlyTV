@@ -11,10 +11,10 @@ async function main() {
     A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
     so FlyTVContract here is a factory for instances of our FlyTV contract.
     */
-    const cryptoDevsContract = await ethers.getContractFactory("FlyTV");
+    const flyTVContract = await ethers.getContractFactory("FlyTV");
 
     // deploy the contract
-    const deployedFlyTVContract = await cryptoDevsContract.deploy(
+    const deployedFlyTVContract = await flyTVContract.deploy(
         metadataURL,
         whitelistContract
     );

@@ -1,6 +1,15 @@
 // Address of the Whitelist Contract that you deployed
 const WHITELIST_CONTRACT_ADDRESS = "0xfCA93341fDd8fFaFdCcB4D2C09e3486862476499";
+// Address of the NFT_CONTRACT_ADDRESS that you deployed
+const NFT_CONTRACT_ADDRESS = "0x5ae0E145A3b6B7Cb2389B211A3bEb5E74c97ba5a";
+// Address of the TOKEN_CONTRACT_ADDRESS that you deployed
+const TOKEN_CONTRACT_ADDRESS = "0x335B672986c945714e85aC7C9f0593079dcEEBc9";
+// Address of the FAKE_NFT_MARKETPLACE that you deployed
+const FAKE_NFT_MARKETPLACE = "0x7Fa17bD444B89BdD3f26cfFD7e403d5eDff3176D";
+// Address of the DAO_CONTRACT_ADDRESS that you deployed
+const DAO_CONTRACT_ADDRESS = "0x783A0cd68E1e3834d1Ac66dFb6fA18EeA6A13370";
 // URL to extract Metadata for a FlyTV NFT
 const METADATA_URL = "https://nft-collection-sneh1999.vercel.app/api/";
 
-module.exports = { WHITELIST_CONTRACT_ADDRESS, METADATA_URL };
+module.exports = { WHITELIST_CONTRACT_ADDRESS, NFT_CONTRACT_ADDRESS,TOKEN_CONTRACT_ADDRESS, METADATA_URL,
+    FAKE_NFT_MARKETPLACE, DAO_CONTRACT_ADDRESS,  METADATA_URL };
