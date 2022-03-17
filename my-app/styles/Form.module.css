@@ -58,6 +58,7 @@
   /* margin-top: 10px; */
   /* margin-left: 10px; */
   font-weight: 500;
+  border-radius: 50px;
   font-size: larger;
 }
 
@@ -80,6 +81,8 @@
 
 .submit:hover {
   transform: scale(1.1);
+  background-color: green;
+
 }
 
 .desc {
