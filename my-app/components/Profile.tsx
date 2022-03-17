@@ -214,7 +214,7 @@ const Profile = () => {
   return (
     <>
       <div className="descriptions">
-        The main problem is that Hackathon Participants have to reinvent the
+        The main problem is that Hackathon participants have to reinvent the
         wheel every time they join a team or a hackathon. Our solution is that
         we create a profile that can be shown to potential teammates when
         applying for a team and used to enter hackathons. One task waiting for

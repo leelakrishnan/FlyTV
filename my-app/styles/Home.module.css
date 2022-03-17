@@ -50,9 +50,11 @@
   font-size: 0.7rem;
   color: var(--color-theme-white);
   width: 12.5rem;
+  border-radius: 50%;
   height: 2.2rem;
   background-color: blue;
   margin-left: 1.5rem;
+  border-radius: 50px;
 }
 
 .logout:hover span {
@@ -61,6 +63,7 @@
 
 .logout:hover:before {
   content: "Logout" !important;
+  
 }
 
 .logout:hover {
