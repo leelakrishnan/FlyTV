@@ -37,7 +37,7 @@ An easy first bounty, fill in the blank (with GitHub!: Read-write-t\_\_\_\_-veri
 
 # DAO Concept
 
-Once you are accepted onto the team, you will be allowed to mint an Welcomed NFT (based of which avatar you currently have chosen). Using that NFT you can claim a gift of 5 of the 10000 FLYTV tokens. 1 token can be spent to propose a "feature to do." Say we proposed a feature "Do a chat option using IPFS." When a Contributor makes a pull request that is merged into GitHub main with "Do a chat option using IPFS." the user wallet for the matching GitHub username is given 1 FLYTV. The proposer of the successful feature is returned their 1 token and given 1 token. The feature can also be NFTs that are burnable.
+Once you are accepted onto the team, you will be allowed to mint an Welcomed NFT (based of which avatar you currently have chosen). Using that NFT you can claim a gift of 5 of the 10000 FLYTV tokens. 1 token can be spent to propose a "feature to do." Say we proposed a feature "Do a chat option using IPFS." When a Contributor makes a pull request that is merged into GitHub main with "Do a chat option using IPFS." The user wallet for the matching GitHub username is given 1 FLYTV. The proposer of the successful feature is returned their 1 token and given 1 token. The feature can also be NFTs that are burnable.
 
 > The reason we do all this is because we want to incentivize good hackathon habits, which include proper open source ettiquite which requires 1-to-1 communication, making visible contributions to the project between meetings and keeping the Project board clean.
 
