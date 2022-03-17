@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -90,13 +91,14 @@ const TeamProjectManagement = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        early on, Eric made an example of using github projects (see image
-        below), <br />
+      <div className={styles.pagetooltip}>
+        <a data-tip='Early on, Eric made an example of using github projects (see image
+        below),
         our team voted to track work using github{" "}
         <a href="https://qr.ae/pGLZcq">quora link</a> and thought we could
-        create <br />
-        or interact directly with github programmatically.
+        create
+        or interact directly with github programmatically.'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

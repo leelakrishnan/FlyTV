@@ -9,6 +9,7 @@ import { useMoralis } from "react-moralis";
 import Moralis from "moralis";
 import Loader from "../components/Loader";
 import MaterialTable from "material-table";
+import ReactTooltip from "react-tooltip";
 
 const Team: NextPage = () => {
   const router = useRouter();
@@ -127,7 +128,7 @@ const Team: NextPage = () => {
       setAllTeamData(teamData);
       // @ts-ignore
       setTeamsLooking(teamsFilteredData);
-      debugger;
+      
     }
   };
 
@@ -162,9 +163,6 @@ const Team: NextPage = () => {
           break;
         }
       }
-
-      debugger;
-
       if (currentTeam) {
         const TeamInvitees = Moralis.Object.extend("TeamInvitees");
         const publicTeamInvitees = new TeamInvitees();
@@ -221,6 +219,13 @@ const Team: NextPage = () => {
       </Head>
       <main>
         <Nav />
+        <div className={styles.pagetooltip}>
+          <a data-tip='  You are only seeing this page because you already{" "}
+                      have a team or You are searching for Team. What would it be helpful to see here?{" "}
+                      "_ new messages 💌" or money waiting
+                      or current proposals needing voting? yes to all?'>Help</a>
+          <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+        </div>
         <div className={styles.hero}>
           <div className={styles.container2} style={{ height: "500px" }}>
             <div className={styles.container3}>
@@ -232,12 +237,6 @@ const Team: NextPage = () => {
                 teamData &&
                 teamLoaded === "loaded" && (
                   <>
-                    <div className="descriptions">
-                      You are only seeing this page because you already <br />{" "}
-                      have a team. What would it be helpful to see here? <br />{" "}
-                      "_ new messages 💌" <br /> or money waiting <br />
-                      or current proposals needing voting? yes to all?
-                    </div>
                     <button
                       className={styles.join}
                       onClick={(e) => {

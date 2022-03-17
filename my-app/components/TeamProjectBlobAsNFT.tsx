@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {useMoralis} from "react-moralis";
 import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 const { NFTStorage, Blob } = require('nft.storage');
 const client = new NFTStorage({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGY1RjViM2RGQzkwZmI1QzFhYTJENWU3NmYyNjIxMjQ3NDczZGRFMzYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0NzQ4NTIzMTcxNywibmFtZSI6IkZseVRWIn0.I5e-Fe7u6XeYayYkL0yyRl7HWGz1LrGjp-oGhUJ8Mo0'});
 
@@ -42,7 +43,7 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
     };
 
     async function store(data: string) {
-        debugger;
+        
         const fileCid = await client.storeBlob(new Blob([data]));
         const fileUrl = "https://ipfs.io/ipfs/" + fileCid;
         let teamName = teamData?.get("teamName");
@@ -53,21 +54,21 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
             "creator": "FlyTV",
             "file_url": fileUrl
         };
-        debugger;
+        
         const metadata = new Blob([JSON.stringify(obj)]);
         const metadataCid = await client.storeBlob(metadata);
         const metadataUrl = "https://ipfs.io/ipfs/" + metadataCid;
-        debugger;
+        
         return metadataUrl;
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        debugger;
+        
         const metadataUrl = await store(JSON.stringify(teamData));
         formValues.metaDataUrl = metadataUrl;
-        debugger;
+        
         const myTeam = Moralis.Object.extend("Team");
         const myTeamObj = new myTeam();
         myTeamObj.set("id", teamData.id);
@@ -82,6 +83,11 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
     };
 
     return (
+        <>
+            <div className={styles.pagetooltip}>
+                <a data-tip='Fill me'>Help</a>
+                <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+            </div>
         <div className={styles.container}>
             {loader == "loaded" &&
                 <form className={styles.form}>
@@ -104,6 +110,8 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
                 </form>
             }
         </div>
+
+        </>
     );
 }
 export default TeamProjectBlobAsNFT;

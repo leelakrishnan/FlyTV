@@ -194,3 +194,17 @@ footer {
     -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
     2px 2px 5px #000;
 }
+
+.pagetooltip {
+position:fixed;bottom:2em;right:1em;
+}
+.extraClass {
+  font-size: 20px !important;
+  pointer-events: auto !important;
+
+:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+}

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -90,14 +91,15 @@ const TeamGithub = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        We realized that not everybody knows where everything is <br />
-        or at least, could waste time looking or asking for it. <br />
+      <div className={styles.pagetooltip}>
+        <a data-tip='We realized that not everybody knows where everything is
+        or at least, could waste time looking or asking for it. 
         And even more importantly than ever, we can track github activity and
-        verify! <br /> Check out this document we wrote about using{" "}
+        verify!  Check out this document we wrote about using{" "}
         <a href="https://iodized-motorcycle-19d.notion.site/Github-Flow-for-Hackathons-e0d394f3a1e64757b04b7e045ca0970a">
           GitHub for Hackathons
-        </a>
+        </a>'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
       <div className={styles.container}>
         {loader == "loaded" && (

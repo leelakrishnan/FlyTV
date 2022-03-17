@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {useMoralis} from "react-moralis";
 import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
     teamData: any,
@@ -62,6 +63,10 @@ const TeamFun = ({ teamData }: Props)  => {
 
     return (
         <>
+            <div className={styles.pagetooltip}>
+                <a data-tip='Fill me'>Help</a>
+                <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+            </div>
             <div className={styles.container}>
                     <form className={styles.form}>
                         <div className={styles.formGroups}>

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
 import { useRouter } from "next/router";
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
   teamData: any;
@@ -117,14 +118,16 @@ const TeamMission = ({ teamData }: Props) => {
 
   return (
     <>
-      <div className="descriptions">
-        Team Info allows the team members to update the public values as they
-        gain clarity. <br /> The team mission must be a clear statement and the
-        changes to these should be trackable. <br />
-        Most importantly, we are rewarding our users for good habits <br />
+      <div className={styles.pagetooltip}>
+        <a data-tip='  Team Info allows the team members to update the public values as they
+        gain clarity. The team mission must be a clear statement and the
+        changes to these should be trackable.
+        Most importantly, we are rewarding our users for good habits
         And even more importantly than most, a team can be looking for members
-        or closed!
+        or closed!'>Help</a>
+        <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
       </div>
+
       <div className={styles.container}>
         {loader == "loaded" && (
           <form className={styles.form}>
