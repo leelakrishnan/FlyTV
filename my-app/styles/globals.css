@@ -129,6 +129,18 @@ footer {
   background-color: black !important;
 }
 
+.dropdown-container span{
+  color: var(--color-theme-white) ;
+}
+
+.dropdown-container li:hover span{
+  color: var(--color-theme-black) ;
+}
+
+.dropdown-content .panel-content {
+  background-color: black !important;
+}
+
 .meme {
   position: relative;
 }
