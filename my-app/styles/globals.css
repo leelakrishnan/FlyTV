@@ -91,9 +91,10 @@ footer {
   display: block;
   border: 2px solid #f3f3f3; /* Light grey */
   border-top: 2px solid rgba(1, 8, 235, 1); /* Blue */
-  border-radius: 50%;
+  border-radius: 50px;
   width: 60px;
   height: 60px;
+  border-radius: 50%;
   animation: spin 2s linear infinite;
   margin-bottom: 10px;
 }
@@ -126,6 +127,18 @@ footer {
   color: red !important;
 }
 .rmsc.dropdown-container {
+  background-color: black !important;
+}
+
+.dropdown-container span{
+  color: var(--color-theme-white) ;
+}
+
+.dropdown-container li:hover span{
+  color: var(--color-theme-black) ;
+}
+
+.dropdown-content .panel-content {
   background-color: black !important;
 }
 

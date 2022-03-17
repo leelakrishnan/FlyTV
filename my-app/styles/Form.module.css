@@ -11,8 +11,9 @@
 @media screen and (max-width: 600px) {
   .container {
     max-width: 100%;
+
   }
-}
+}    
 
 .form {
   width: 100%;
@@ -20,7 +21,7 @@
   flex-direction: column;
   margin: 10px;
   border: 0.5px solid rgba(1, 8, 235, 1);
-  border-radius: 0px;
+  border-radius: 50px;
   background-color: #0c0c0c;
   /* background-image: radial-gradient( rgb(1,0,240,0.5),#fff, rgba(1,0,240, 0.5)); */
   /* box-shadow: 20px 20px 20px 0 rgba(0,0,0), -8px -8px 15px 0 rgba(1,8,235,0.9); */
@@ -57,6 +58,7 @@
   /* margin-top: 10px; */
   /* margin-left: 10px; */
   font-weight: 500;
+  border-radius: 50px;
   font-size: larger;
 }
 
@@ -79,6 +81,8 @@
 
 .submit:hover {
   transform: scale(1.1);
+  background-color: green;
+
 }
 
 .desc {
