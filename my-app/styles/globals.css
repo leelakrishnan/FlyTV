@@ -208,6 +208,14 @@ footer {
     2px 2px 5px #000;
 }
 
+
+.MuiButtonBase-root {
+  color: white !important;
+}
+.MuiButtonBase-root.Mui-selected {
+  color: red !important;
+}
+
 .pagetooltip {
 position:fixed;bottom:2em;right:1em;
 }
