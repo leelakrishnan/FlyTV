@@ -6,7 +6,9 @@ import { useRouter } from 'next/router'
 import Moralis from "moralis";
 import ReactTooltip from "react-tooltip";
 const { NFTStorage, Blob } = require('nft.storage');
-const client = new NFTStorage({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGY1RjViM2RGQzkwZmI1QzFhYTJENWU3NmYyNjIxMjQ3NDczZGRFMzYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY0NzQ4NTIzMTcxNywibmFtZSI6IkZseVRWIn0.I5e-Fe7u6XeYayYkL0yyRl7HWGz1LrGjp-oGhUJ8Mo0'});
+import {NFT_STORAGE_CLIENT_ID} from "../secrets";
+debugger;
+const client = new NFTStorage({ token: NFT_STORAGE_CLIENT_ID});
 
 type Props = {
     teamData: any,
@@ -20,7 +22,6 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
     const {user, setUserData, userError, isUserUpdating, refetchUserData} = useMoralis();
     const [loader, setLoader] = useState("not-loaded");
     const [loading, setLoading] = useState(false);
-
     useEffect(() => {
 
         mapMoralisTeamToFormValues()
@@ -85,7 +86,7 @@ const TeamProjectBlobAsNFT = ({ teamData }: Props)  => {
     return (
         <>
             <div className={styles.pagetooltip}>
-                <a data-tip='Fill me'>Help</a>
+                <a data-tip='Mint the project info and share it as ipfs link as showcase'>Help</a>
                 <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
             </div>
         <div className={styles.container}>
