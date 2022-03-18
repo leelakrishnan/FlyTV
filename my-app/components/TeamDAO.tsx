@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import {useMoralis} from "react-moralis";
-import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Web3Modal from "web3modal";
@@ -10,7 +9,6 @@ import { WHITELIST_CONTRACT_ADDRESS, WHITELIST_ABI, NFT_CONTRACT_ADDRESS, NFT_AB
     TOKEN_CONTRACT_ADDRESS, TOKEN_CONTRACT_ABI, FAKE_NFT_MARKETPLACE_ADDRESS, FAKE_NFT_ABI,
     DAO_CONTRACT_ADDRESS, DAO_CONTRACT_ABI } from "../constants";
 import ReactTooltip from "react-tooltip";
-
 type Props = {
     teamData: any,
 }
@@ -869,7 +867,8 @@ const TeamDAO = ({ teamData }: Props)  => {
     return (
         <>
             <div className={styles.pagetooltip}>
-                <a data-tip='Fill me'>Help</a>
+                <a data-tip='this working prototype of a team DAO was built to facilitate decisionmaking between internet strangers.
+Try it out, propose a feature or new team member and if it has more yays than nays it will pass at the deadline.'>Help</a>
                 <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
             </div>
             <div className={styles.container}>

@@ -64,7 +64,9 @@ const TeamFun = ({ teamData }: Props)  => {
     return (
         <>
             <div className={styles.pagetooltip}>
-                <a data-tip='Fill me'>Help</a>
+                <a data-tip='Hackathons can be stressful. Create random memes with your team at the beginning of a meeting to warm up!
+Create and propose ideas for your collaboration. Use this DOA to make have more transparent decision making and accountability,
+ by having team mates vote on any project suggestions'>Help</a>
                 <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
             </div>
             <div className={styles.container}>
