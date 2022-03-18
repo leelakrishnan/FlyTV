@@ -1,5 +1,5 @@
 import { useWeb3Auth } from "../services/web3auth";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -9,6 +9,9 @@ import { AvatarPickerDialog, Avatar as AtlaskAvatar } from '@atlaskit/media-avat
 import { ModalTransition } from '@atlaskit/modal-dialog';
 import { Avatar } from "@mui/material";
 import Moralis from "moralis";
+import { PROFILE_MINT_ADDRESS, PROFILE_MINT_CONTRACT_ABI} from "../constants";
+import {Contract, providers, utils} from "ethers";
+import Web3Modal from "web3modal";
 
 const avatars: Array<AtlaskAvatar> = [
   {dataURI:'https://ipfs.io/ipfs/bafybeih4oxzw7zfgpokhfk3amxhkkkxkn54xow4uwskdb2nhgnfqqmvbbq'},
@@ -35,13 +38,16 @@ const avatars: Array<AtlaskAvatar> = [
   ];
 
 const Nav = () => {
-  const { authenticate, setUserData, user, isAuthenticated, logout } = useMoralis();
+  const {authenticate, setUserData, user, isAuthenticated, logout} = useMoralis();
   const [loadingState, setLoadingState] = useState("not-loaded");
-  const { provider, logoutWeb3Auth, getAccounts } = useWeb3Auth();
+  const {provider, logoutWeb3Auth, getAccounts} = useWeb3Auth();
   const [walletAddress, setWalletAddress] = useState("not-set");
   const [badges, setBadges] = useState(0);
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [avatar, setAvatar] = useState("");
+  // walletConnected keep track of whether the user's wallet is connected or not
+  const [walletConnected, setWalletConnected] = useState(false);
+  const web3ModalRef = useRef();
 
   useEffect(() => {
     if (provider) {
@@ -54,6 +60,23 @@ const Nav = () => {
     }
     setLoadingState("loaded");
   }, []);
+
+
+  useEffect(() => {
+    // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
+    if (!walletConnected) {
+      // Assign the Web3Modal class to the reference object by setting it's `current` value
+      // The `current` value is persisted throughout as long as this page is open
+      // @ts-ignore
+      web3ModalRef.current = new Web3Modal({
+        network: "rinkeby",
+        providerOptions: {},
+        disableInjectedProvider: false,
+      });
+      let e = {};
+      connectWallet(e);
+    }
+  }, [walletConnected]);
 
   function mapMoralisUserInfoToStateValues() {
     const badgesValue = user?.get("badges");
@@ -82,6 +105,28 @@ const Nav = () => {
     }
   }
 
+  /*
+connectWallet: Connects the MetaMask wallet
+*/
+  const connectWallet = async (e) => {
+    try {
+      if (e && e.preventDefault()) {
+        e.preventDefault();
+      }
+    } catch (err) {
+      // console.error(err);
+    }
+    try {
+      // Get the provider from web3Modal, which in our case is MetaMask
+      // When used for the first time, it prompts the user to connect their wallet
+      await getProviderOrSigner();
+      setWalletConnected(true);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   function copy() {
     toast.success(walletAddress + " copied to clipboard!", {
       position: toast.POSITION.BOTTOM_CENTER,
@@ -93,8 +138,8 @@ const Nav = () => {
     setAvatarOpen(true);
   }
 
-  function changeAvatar(selectedAvatar: any) {
-    debugger;
+  const changeAvatar = async (selectedAvatar: any) => {
+
     setAvatar(selectedAvatar.dataURI);
     setUserData({
       avatar: selectedAvatar.dataURI === "" ? undefined : selectedAvatar.dataURI,
@@ -106,75 +151,122 @@ const Nav = () => {
     publicUser.set("id", user.id);
     publicUser.setACL(postACL);
     publicUser.save();
+
     toast.success(" Profile picture Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
     setAvatarOpen(false);
+    await mintProfileAvatar(selectedAvatar.dataURI);
   }
 
+  const getProviderOrSigner = async (needSigner = false) => {
+    // Connect to Metamask
+    // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
+    // @ts-ignore
+    const provider = await web3ModalRef.current.connect();
+    const web3Provider = new providers.Web3Provider(provider);
+
+    // If user is not connected to the Rinkeby network, let them know and throw an error
+    const {chainId} = await web3Provider.getNetwork();
+    if (chainId !== 4) {
+      window.alert("Change the network to Rinkeby");
+      throw new Error("Change network to Rinkeby");
+    }
+
+    if (needSigner) {
+      const signer = web3Provider.getSigner();
+      return signer;
+    }
+    return web3Provider;
+  };
+
+
+  const mintProfileAvatar = async (profileUrl: string) => {
+    try {
+      // We need a Signer here since this is a 'write' transaction.
+      // Create an instance of tokenContract
+      const signer = await getProviderOrSigner(true);
+      // Create an instance of tokenContract
+      const profileMintContract = new Contract(
+          PROFILE_MINT_ADDRESS,
+          PROFILE_MINT_CONTRACT_ABI,
+          signer
+      );
+      const tx = await profileMintContract.mintMyNFT(profileUrl);
+      // wait for the transaction to get mined
+      await tx.wait();
+      window.alert("Sucessfully minted Avatar");
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // @ts-ignore
   return (
-    <nav>
-      <Link href="/MyProfile" passHref>
-        <a className={styles.logo}>My Profile</a>
-      </Link>
-      <Link href="/Hackathon" passHref>
-        <a className={styles.logo}>Hackathon</a>
-      </Link>
-      <div className={styles.rightNav}>
-        {loadingState == "loaded" && user && user.id && (
+      <nav>
+        <Link href="/MyProfile" passHref>
+          <a className={styles.logo}>My Profile</a>
+        </Link>
+        <Link href="/Hackathon" passHref>
+          <a className={styles.logo}>Hackathon</a>
+        </Link>
+        <div className={styles.rightNav}>
+          {loadingState == "loaded" && user && user.id && (
               <button className={styles.connect}>
                 <span>Badges {badges}</span>
               </button>
-        )}
-        {loadingState == "loaded" && walletAddress != "not-set" && (
-          <CopyToClipboard text={walletAddress}>
-            <button className={styles.connect} onClick={copy}>
-              <span>Copy Wallet To Clipboard</span>
-            </button>
-          </CopyToClipboard>
-        )}
-        {loadingState == "loaded" && walletAddress != "not-set" && avatarOpen && (
-          <>
-            <ModalTransition>
-              <AvatarPickerDialog
-                  avatars={avatars}
-                  onImagePicked={(selectedImage, crop) => {
-                    console.log(selectedImage.size, crop.x, crop.y, crop.size);
-                  }}
-                  onAvatarPicked={(selectedAvatar) => {
-                    changeAvatar(selectedAvatar);
-                  }}
+          )}
+          {loadingState == "loaded" && walletAddress != "not-set" && (
+              <CopyToClipboard text={walletAddress}>
+                <button className={styles.connect} onClick={copy}>
+                  <span>Copy Wallet To Clipboard</span>
+                </button>
+              </CopyToClipboard>
+          )}
+          {loadingState == "loaded" && walletAddress != "not-set" && avatarOpen && (
+              <>
+                <ModalTransition>
+                  <AvatarPickerDialog
+                      avatars={avatars}
+                      onImagePicked={(selectedImage, crop) => {
+                        console.log(selectedImage.size, crop.x, crop.y, crop.size);
+                      }}
+                      onAvatarPicked={(selectedAvatar) => {
+                        changeAvatar(selectedAvatar);
+                      }}
 
-                  onCancel={() => setAvatarOpen(false)}
+                      onCancel={() => setAvatarOpen(false)}
+                  />
+                </ModalTransition>
+              </>
+          )}
+
+          {loadingState == "loaded" && (
+              <button className={styles.logout} onClick={logoutFlyTV}>
+                <span>Log Out</span>
+              </button>
+          )}
+          {loadingState == "loaded" && walletAddress != "not-set" && avatar && (
+              <Avatar onClick={avatarClick}
+                      alt=""
+                      src={avatar}
               />
-            </ModalTransition>
-          </>
-        )}
-
-        {loadingState == "loaded" && (
-          <button className={styles.logout} onClick={logoutFlyTV}>
-            <span>Log Out</span>
-          </button>
-        )}
-        {loadingState == "loaded" && walletAddress != "not-set" && avatar && (
-            <Avatar onClick={avatarClick}
-                alt=""
-                src= {avatar}
-            />
-        )}
-        {loadingState == "loaded" && walletAddress != "not-set" && user && !avatar && (
-            <Avatar onClick={avatarClick}
-                    alt=""
-                    src=""
-            />
-        )}
-        <div className={styles.displayNone} id="console">
-          <p className={styles.code}></p>
+          )}
+          {loadingState == "loaded" && walletAddress != "not-set" && user && !avatar && (
+              <Avatar onClick={avatarClick}
+                      alt=""
+                      src=""
+              />
+          )}
+          {loadingState == "not-loaded" &&
+              <div className="loader-center">
+                <div className="loader"></div>
+              </div>}
+          <div className={styles.displayNone} id="console">
+            <p className={styles.code}></p>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
   );
 };
 export default Nav;

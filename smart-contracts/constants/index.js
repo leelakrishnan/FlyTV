@@ -8,6 +8,8 @@ const TOKEN_CONTRACT_ADDRESS = "0x1bC764c27a20bfE0179C04fF2096f49e1371433d";
 const FAKE_NFT_MARKETPLACE = "0xD66ddC340beA6e2Bc6E4Ea3A56D60E07C053A375";
 // Address of the DAO_CONTRACT_ADDRESS that you deployed
 const DAO_CONTRACT_ADDRESS = "0xE29b20BD18DAFf1B9d9a4c52ecC9524F4E5220b4";
+// Address of the PROFILE_MINT_ADDRESS that you deployed
+const PROFILE_MINT_ADDRESS = "0xFD4Ee34Ec24B0a045dCfF166ABeCdcafa7ea9E8C";
 // URL to extract Metadata for a FlyTV NFT
 const METADATA_URL = "https://nft-collection-sneh1999.vercel.app/api/";
 
