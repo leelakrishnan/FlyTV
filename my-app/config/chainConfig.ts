@@ -21,6 +21,16 @@ export const CHAIN_CONFIG = {
     tickerName: "matic",
 
   } as CustomChainConfig,
+  rinkeby: {
+    chainNamespace: CHAIN_NAMESPACES.EIP155,
+    rpcTarget:
+        "https://rinkeby.infura.io/v3/7c0e52f11cb8492c94804f28d8a0ee7f",
+    blockExplorer: "https://rinkeby.etherscan.io",
+    chainId: "4",
+    displayName: "Rinkeby Testnet",
+    ticker: "ETH",
+    tickerName: "ETH",
+  } as CustomChainConfig,
 } as const;
 
 export type CHAIN_CONFIG_TYPE = keyof typeof CHAIN_CONFIG;

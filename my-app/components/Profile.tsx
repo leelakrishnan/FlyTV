@@ -71,7 +71,7 @@ const Profile = () => {
     }
   }, [user]);
 
-  function loadProfileByProfileId(profileId: string) {
+  function loadProfileByProfileId(profileId: any) {
     async function getMemberInfo(profileId: string) {
       const userQuery = new Moralis.Query(Moralis.User);
       userQuery.equalTo("objectId", profileId);
@@ -132,19 +132,21 @@ const Profile = () => {
   }
 
   // create a function which set the values of form field
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: any) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
   const validateError = () => {
-    const errors = {};
+    const errors = {
+      email : ""
+    };
     if (formValues.email === "") {
       errors.email = "Email is required";
     }
     return errors;
   };
 
-  const handleCancel = async (e) => {
+  const handleCancel = async (e: any) => {
     e.preventDefault();
     router.push("/Team");
   };
@@ -157,7 +159,7 @@ const Profile = () => {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("HERE");
 
@@ -202,7 +204,9 @@ const Profile = () => {
     const publicUser = new UserObj();
     const postACL = new Moralis.ACL(Moralis.User.current());
     postACL.setPublicReadAccess(true);
-    publicUser.set("id", user.id);
+    if (user && user.id) {
+      publicUser.set("id", user.id);
+    }
     publicUser.setACL(postACL);
     publicUser.save();
     toast.success(" Profile Saved!", {
@@ -212,6 +216,7 @@ const Profile = () => {
     setLoading(false);
   };
 
+  // @ts-ignore
   return (
     <>
       <div className={styles.pagetooltip}>

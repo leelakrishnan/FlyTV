@@ -11,7 +11,7 @@ import { MoralisProvider } from "react-moralis";
 
 function MyApp({ Component, pageProps }: AppProps) {
     const [web3AuthNetwork] = useState<WEB3AUTH_NETWORK_TYPE>("testnet");
-    const [chain] = useState<CHAIN_CONFIG_TYPE>("polygon");
+    const [chain] = useState<CHAIN_CONFIG_TYPE>("rinkeby");
 
     if (!process.env.NEXT_PUBLIC_MORALIS_APP_ID || !process.env.NEXT_PUBLIC_MORALIS_SERVER_URL) {
         return (

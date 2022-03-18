@@ -49,7 +49,7 @@ const TeamAcceptRejectInvitees = ({ teamData }: Props) => {
         for (let i = 0; i < invitees.length; i++) {
           currentInviteesData.push({
             userInfo:
-              "http://localhost:3000/MyProfile?profileId=" + invitees[i],
+              "/MyProfile?profileId=" + invitees[i],
             userId: invitees[i],
           });
         }

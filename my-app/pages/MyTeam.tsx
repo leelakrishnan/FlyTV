@@ -8,7 +8,7 @@ import Loader from "../components/Loader";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import TeamMission from "../components/TeamMission";
 import TeamGithub from "../components/TeamGithub";
 import TeamGatherRoom from "../components/TeamGatherRoom";
@@ -19,7 +19,7 @@ import TeamProjectManagement from "../components/TeamProjectManagement";
 import TeamMembers from "../components/TeamMembers";
 import TeamFun from "../components/TeamFun";
 import Project from "../components/Project";
-import TeamDAO from "../components/TeamDao";
+import TeamDAO from "../components/TeamDAO";
 import TeamProjectBlobAsNFT from "../components/TeamProjectBlobAsNFT";
 
 function TabPanel(props) {
@@ -51,7 +51,7 @@ function a11yProps(index: any) {
 }
 const MyTeam = () => {
   const router = useRouter();
-  const { user, setUserData, userError, isUserUpdating, refetchUserData } =
+  const { user} =
     useMoralis();
   const [teamId, setTeamId] = useState("");
   const [loading, setLoading] = useState("not-loaded");
@@ -77,7 +77,9 @@ const MyTeam = () => {
                 setTeamLoaded("loaded");
               }
             })
-            .catch(function (error) {});
+            .catch(function (error) {
+              console.log(error);
+            });
         }
 
         // @ts-ignore

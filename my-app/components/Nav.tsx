@@ -10,7 +10,7 @@ import { ModalTransition } from '@atlaskit/modal-dialog';
 import { Avatar } from "@mui/material";
 import Moralis from "moralis";
 import { PROFILE_MINT_ADDRESS, PROFILE_MINT_CONTRACT_ABI} from "../constants";
-import {Contract, providers, utils} from "ethers";
+import {Contract, providers} from "ethers";
 import Web3Modal from "web3modal";
 
 const avatars: Array<AtlaskAvatar> = [
@@ -108,7 +108,7 @@ const Nav = () => {
   /*
 connectWallet: Connects the MetaMask wallet
 */
-  const connectWallet = async (e) => {
+  const connectWallet = async (e: any) => {
     try {
       if (e && e.preventDefault()) {
         e.preventDefault();
@@ -133,7 +133,7 @@ connectWallet: Connects the MetaMask wallet
     });
   }
 
-  function avatarClick(e) {
+  function avatarClick(e: any) {
     e.preventDefault();
     setAvatarOpen(true);
   }
@@ -145,13 +145,17 @@ connectWallet: Connects the MetaMask wallet
       avatar: selectedAvatar.dataURI === "" ? undefined : selectedAvatar.dataURI,
     });
     const UserObj = Moralis.Object.extend("User");
-    const publicUser = new UserObj();
-    const postACL = new Moralis.ACL(Moralis.User.current());
-    postACL.setPublicReadAccess(true);
-    publicUser.set("id", user.id);
-    publicUser.setACL(postACL);
-    publicUser.save();
+    if (UserObj) {
+      const publicUser = new UserObj();
+      const postACL = new Moralis.ACL(Moralis.User.current());
+      postACL.setPublicReadAccess(true);
+      if (user && user.id) {
+        publicUser.set("id", user.id);
+      }
+      publicUser.setACL(postACL);
+      publicUser.save();
 
+    }
     toast.success(" Profile picture Saved!", {
       position: toast.POSITION.BOTTOM_CENTER,
     });
