@@ -3,6 +3,9 @@
 > Fly Team Vote
 > 🛗 Team ✅ Vote ✌🏽 Fly 🚀
 ![Team Logo](https://ipfs.io/ipfs/bafybeialdd56nwoyeezwihp3r4bo75krmijfqikbgql27s56bsmbxspb6q)
+
+> lots of metadata, scroll down to **how to run on your local machine for steps**
+
 ## Project Proposal
 An open source collaboration solution making hackathons more transparent and easier to do.
 ## Problem
@@ -71,6 +74,7 @@ In my-app/ folder, make sure there is an ".env.local" file with usable values fo
 1. WEB3AUTH_CLIENT_ID=
 2. NEXT_PUBLIC_MORALIS_APP_ID=
 3. NEXT_PUBLIC_MORALIS_SERVER_URL=
+4. NFT_STORAGE_CLIENT_ID=
    > check the .env.local.example on what client id required for project to run
 
 > make your own if you want, or ask the team for help.
