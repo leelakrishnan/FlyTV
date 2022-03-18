@@ -7,7 +7,7 @@ import Moralis from "moralis";
 import ReactTooltip from "react-tooltip";
 const { NFTStorage, Blob } = require('nft.storage');
 debugger;
-const client = new  process.env.NFT_STORAGE_CLIENT_ID
+const client = new NFTStorage({ token: process.env.NFT_STORAGE_CLIENT_ID});
 
 type Props = {
     teamData: any,
