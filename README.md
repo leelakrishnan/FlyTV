@@ -3,7 +3,19 @@
 > Fly Team Vote
 > 🛗 Team ✅ Vote ✌🏽 Fly 🚀
 
-important folders:
+## a clear description of the project and how the technology is used:
+
+> Feature set the problems that are solved and the feature wishes for future (flightpath)
+
+1. IPFS for Video Drive
+2. NFT.Storage for NFTs & The Project Blob
+3. Web3.Storage for **\_**?
+4. Meetings in the Protocol Labs Community Office gathertown
+5. Mentorship from Konstantin, Developer Ally, and TheDiscordian for feedback on our app.
+6. Web3.Storage to upload 25 Minutes of Don't Stop Believing.wav
+7. https://shiny-thunder-1695.on.fleek.co/ we deployed our "Basic Template Landing Page" using fleek
+
+## important folders:
 
 1. readme/ //-collected documentation
 2. my-app/ //the main application, remember to cd here to npm install etc
