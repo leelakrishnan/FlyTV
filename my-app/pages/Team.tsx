@@ -65,7 +65,7 @@ const Team: NextPage = () => {
 
   function takeToFaberGatherTown(e: any) {
     e.preventDefault();
-    window.open("https://app.gather.town/app/EBUbEtmjxWiWb4hc/protocol-community-office");
+    window.open("https://app.gather.town/app/FM6K0fdAuZ4FNcTJ/world0-wingbirds");
   }
 
   const handleTeamCreateChange = (e: {
