@@ -10,7 +10,8 @@ import { ModalTransition } from '@atlaskit/modal-dialog';
 import { Avatar } from "@mui/material";
 import Moralis from "moralis";
 
-const avatars: Array<AtlaskAvatar> = [{dataURI:'https://ipfs.io/ipfs/bafybeih4oxzw7zfgpokhfk3amxhkkkxkn54xow4uwskdb2nhgnfqqmvbbq'},
+const avatars: Array<AtlaskAvatar> = [
+  {dataURI:'https://ipfs.io/ipfs/bafybeih4oxzw7zfgpokhfk3amxhkkkxkn54xow4uwskdb2nhgnfqqmvbbq'},
   {dataURI:'https://ipfs.io/ipfs/bafybeihxazgvkvu5ql6xy67usboq5t2eb4mntqqmjxbcl3vppaenxtcgb4'},
   {dataURI:'https://ipfs.io/ipfs/bafybeidl2fxdcublvkhtnjyorvdwktz4byyb57md22gcte6cgtgd7ijeme'},
   {dataURI:'https://ipfs.io/ipfs/bafybeibsnh2zxfgwzcjezld2meuv6e3fzhowike2wkodr2u4dverwyoanm'},
@@ -28,19 +29,10 @@ const avatars: Array<AtlaskAvatar> = [{dataURI:'https://ipfs.io/ipfs/bafybeih4ox
   {dataURI:'https://ipfs.io/ipfs/bafybeibi4xdec4xxy27pbhdcqn5ntvl2wi6qzjcoe4wpuewojjpwa7yuie'},
   {dataURI:'https://ipfs.io/ipfs/bafybeihponuvg6qk2vuna3icnwonnkufzddhj5hfpwxrbdbefnsiqadbhe'},
   {dataURI:'https://ipfs.io/ipfs/bafybeidztsjtlpxuya4exc4vyhqnxxncmsoeprrrd5wo4rkijhyr5rxr2y'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeia7sq2hddrgeczaqhkxabkjbr2e5gfyt6ntn5trbxrwhzhu55dfkq'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeiaz6vu66ko4qeeapors2ldv7qs7qynl2upaqy6lvnp5wiuqonapku'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeidm3jer3h2bflgykurcbtuxoplgswvgmvkbtri3cw5lem3j352hcu'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeibbbuatg37nerjc74xke7lxn2ofzhl4yo7cpinyik7iajt46s7bua'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeih4oxzw7zfgpokhfk3amxhkkkxkn54xow4uwskdb2nhgnfqqmvbbq'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeicxpy24ohveaskaby6zzirg2a5s74csg4dkiqxue36cbnjwyupal4'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeihxazgvkvu5ql6xy67usboq5t2eb4mntqqmjxbcl3vppaenxtcgb4'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeibdt2iiml5kmzllqiyruy5zzcjjmxqqczzmx7mudyyz5pnfmtzp2u'},
   {dataURI:'https://ipfs.io/ipfs/bafybeifgjikfedbubmsgppikbl5fccdbjsgitsqgvbk6fhdhcajmrrfhb4'},
   {dataURI:'https://ipfs.io/ipfs/bafybeihx5iloylvzrynibxz77qlsnl44pxh6x3t6y333veikfdqngwwcka'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeifocns76bdxzcb2xsro6hweou2d242lne7xuazrqqpnhveeaqxm7a'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeidl2fxdcublvkhtnjyorvdwktz4byyb57md22gcte6cgtgd7ijeme'},
-  {dataURI:'https://ipfs.io/ipfs/bafybeibhekxlwe3eksmu6ooezlk7qjey256su4lziocjbytgdzm5j2mgrq'}];
+  {dataURI:'https://ipfs.io/ipfs/bafybeifocns76bdxzcb2xsro6hweou2d242lne7xuazrqqpnhveeaqxm7a'}
+  ];
 
 const Nav = () => {
   const { authenticate, setUserData, user, isAuthenticated, logout } = useMoralis();
