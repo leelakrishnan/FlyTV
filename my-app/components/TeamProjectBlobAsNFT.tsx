@@ -6,9 +6,8 @@ import { useRouter } from 'next/router'
 import Moralis from "moralis";
 import ReactTooltip from "react-tooltip";
 const { NFTStorage, Blob } = require('nft.storage');
-import {NFT_STORAGE_CLIENT_ID} from "../secrets";
 debugger;
-const client = new NFTStorage({ token: NFT_STORAGE_CLIENT_ID});
+const client = new  process.env.NFT_STORAGE_CLIENT_ID
 
 type Props = {
     teamData: any,
