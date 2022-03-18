@@ -222,3 +222,11 @@
   justify-content: center;
   padding: 20px;
 }
+
+
+.MuiButtonBase-root {
+  color: white !important;
+}
+.MuiButtonBase-root.Mui-selected {
+  color: red !important;
+}
