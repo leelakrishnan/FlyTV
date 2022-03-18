@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@atlaskit/avatar": "^20.5.7",
+    "@atlaskit/media-avatar-picker": "^23.1.2",
+    "@atlaskit/modal-dialog": "^12.2.5",
     "@babel/runtime": "^7.17.2",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
