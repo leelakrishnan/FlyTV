@@ -632,3 +632,8 @@
 .pagetooltip {
   position:fixed;bottom:2em;right:1em;
 }
+
+.teamFlex{
+  flex-direction: column !important;
+  display: flex !important;
+}

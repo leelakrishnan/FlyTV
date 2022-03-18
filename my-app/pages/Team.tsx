@@ -14,8 +14,8 @@ import ReactTooltip from "react-tooltip";
 const Team: NextPage = () => {
   const router = useRouter();
   const [selectedOption, setSelectedOption] = useState("");
-  const { user, setUserData, userError, isUserUpdating, refetchUserData } =
-    useMoralis();
+  const {user, setUserData, userError, isUserUpdating, refetchUserData} =
+      useMoralis();
   const [teamId, setTeamId] = useState("");
   const [loading, setLoading] = useState("not-loaded");
   const [teamData, setTeamData] = useState({});
@@ -25,10 +25,10 @@ const Team: NextPage = () => {
   const [allTeamData, setAllTeamData] = useState({});
 
   const columns = [
-    { title: "TeamName", field: "teamName" },
-    { title: "TeamMission", field: "mission" },
-    { title: "TeamVision", field: "vision" },
-    { title: "TeamId", field: "teamId" },
+    {title: "TeamName", field: "teamName"},
+    {title: "TeamMission", field: "mission"},
+    {title: "TeamVision", field: "vision"},
+    {title: "TeamId", field: "teamId"},
   ];
   useEffect(() => {
     (async () => {
@@ -39,17 +39,17 @@ const Team: NextPage = () => {
           const query = new Moralis.Query(Team);
           query.equalTo("users", userId);
           query
-            .find()
-            .then(function (results: any) {
-              if (results && results[0].id) {
-                setTeamId(results[0].id);
-                setTeamData(results[0]);
+              .find()
+              .then(function (results: any) {
+                if (results && results[0].id) {
+                  setTeamId(results[0].id);
+                  setTeamData(results[0]);
+                  setTeamLoaded("loaded");
+                }
+              })
+              .catch(function (error) {
                 setTeamLoaded("loaded");
-              }
-            })
-            .catch(function (error) {
-              setTeamLoaded("loaded");
-            });
+              });
         }
 
         await getTeamForUser(user.id);
@@ -61,6 +61,11 @@ const Team: NextPage = () => {
   function takeToMyTeam(e: any) {
     e.preventDefault();
     router.push("/MyTeam");
+  }
+
+  function takeToFaberGatherTown(e: any) {
+    e.preventDefault();
+    window.open("https://app.gather.town/app/EBUbEtmjxWiWb4hc/protocol-community-office");
   }
 
   const handleTeamCreateChange = (e: {
@@ -108,14 +113,14 @@ const Team: NextPage = () => {
 
         if (teamName && lookingForTeamMembers) {
           let teamName = teamData[i]?.get("teamName")
-            ? teamData[i]?.get("teamName")
-            : "";
+              ? teamData[i]?.get("teamName")
+              : "";
           let mission = teamData[i]?.get("mission")
-            ? teamData[i]?.get("mission")
-            : "";
+              ? teamData[i]?.get("mission")
+              : "";
           let vision = teamData[i]?.get("vision")
-            ? teamData[i]?.get("vision")
-            : "";
+              ? teamData[i]?.get("vision")
+              : "";
           let teamId = teamData[i]?.id ? teamData[i]?.id : "";
           teamsFilteredData.push({
             teamName: teamName,
@@ -128,7 +133,7 @@ const Team: NextPage = () => {
       setAllTeamData(teamData);
       // @ts-ignore
       setTeamsLooking(teamsFilteredData);
-      
+
     }
   };
 
@@ -179,10 +184,10 @@ const Team: NextPage = () => {
               const existingInvitee = currentInvitees[j];
               if (existingInvitee == user.id) {
                 toast.success(
-                  "Invitation Already Sent! to Team " + rowData.teamName,
-                  {
-                    position: toast.POSITION.BOTTOM_CENTER,
-                  }
+                    "Invitation Already Sent! to Team " + rowData.teamName,
+                    {
+                      position: toast.POSITION.BOTTOM_CENTER,
+                    }
                 );
                 return;
               }
@@ -212,112 +217,125 @@ const Team: NextPage = () => {
 
   // @ts-ignore
   return (
-    <>
-      <Head>
-        <title>Team Fly TV</title>
-        <meta name="description" content="Team for hackathon" />
-      </Head>
-      <main>
-        <Nav />
-        <div className={styles.pagetooltip}>
-          <a data-tip='  You are only seeing this page because you already{" "}
+      <>
+        <Head>
+          <title>Team Fly TV</title>
+          <meta name="description" content="Team for hackathon"/>
+        </Head>
+        <main>
+          <Nav/>
+          <div className={styles.pagetooltip}>
+            <a data-tip='  You are only seeing this page because you already{" "}
                       have a team or You are searching for Team. What would it be helpful to see here?{" "}
                       "_ new messages 💌" or money waiting
                       or current proposals needing voting? yes to all?'>Help</a>
-          <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
-        </div>
-        <div className={styles.hero}>
-          <div className={styles.container2} style={{ height: "500px" }}>
-            <div className={styles.container3}>
-              {loading == "not-loaded" && (
-                <Loader loaderMessage="Processing..." />
-              )}
-              {loading == "loaded" &&
-                teamId &&
-                teamData &&
-                teamLoaded === "loaded" && (
-                  <>
-                    <button
-                      className={styles.join}
-                      onClick={(e) => {
-                        takeToMyTeam(e);
-                      }}
-                    >
-                      Take to My Team
-                    </button>
-                  </>
-                )}
-              {loading == "loaded" && teamId === "" && teamLoaded === "loaded" && (
-                <>
-                  <div className="descriptions">
-                    {" "}
-                    You are only seeing this page because you don't have a team
-                    yet <br />
-                    This simple page is designed to streamline the process of
-                    getting a team together <br />
-                    we can programmatically require signing{" "}
-                    <a href="https://github.com/leelakrishnan/FlyTV/issues/58">
-                      Team Terms and Conditions
-                    </a>{" "}
-                    before joining a team
-                  </div>
-                  <div className={styles.teamGroups}>
-                    <select value={value} onChange={handleTeamCreateChange}>
-                      <option value="1">I am looking for a team to join</option>
-                      <option value="2">
-                        I am hacking alone want to create a team
-                      </option>
-                      <option value="3">
-                        I have my own team members want to create a team
-                      </option>
-                    </select>
-                    <button
-                      className={styles.join}
-                      onClick={(e) => {
-                        createOrApplyTeam(e);
-                      }}
-                    >
-                      Create/Apply Team
-                    </button>
-                  </div>
-                  {teamsLooking.length > 0 && (
-                    <div className={styles.teamGroups}>
-                      <>
-                        <div className={styles.allTribes}>
-                          <MaterialTable
-                            title="Team members"
-                            columns={columns}
-                            data={teamsLooking}
-                            actions={[
-                              {
-                                icon: "Send Invite",
-                                tooltip: "Send Invite",
-                                onClick: (event, rowData) => {
-                                  console.dir(rowData);
-                                  sendInvite(event, rowData);
-                                },
-                              },
-                              {
-                                icon: "CheckTeam",
-                                tooltip: "CheckTeam",
-                                onClick: (event, rowData) => {
-                                  console.dir(rowData);
-                                  checkTeam(event, rowData);
-                                },
-                              },
-                            ]}
-                          />
-                        </div>
-                      </>
-                    </div>
+            <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+          </div>
+          <div className={styles.hero}>
+            <div className={styles.container2} style={{height: "500px"}}>
+              <div className={styles.container3}>
+                <div className={styles.teamFlex}>
+                  {loading == "not-loaded" && (
+                      <Loader loaderMessage="Processing..."/>
                   )}
-                </>
-              )}
+                  {loading == "loaded" && (
+                      <button
+                          className={styles.join}
+                          onClick={(e) => {
+                            takeToFaberGatherTown(e);
+                          }}
+                      >
+                        Click here to Access Faber Gathertown
+                      </button>
+                  )}
+                  {loading == "loaded" &&
+                      teamId &&
+                      teamData &&
+                      teamLoaded === "loaded" && (
+                          <>
+                            <button
+                                className={styles.join}
+                                onClick={(e) => {
+                                  takeToMyTeam(e);
+                                }}
+                            >
+                              Take to My Team
+                            </button>
+                          </>
+                      )}
+                  {loading == "loaded" && teamId === "" && teamLoaded === "loaded" && (
+                      <>
+
+                        <div className={styles.pagetooltip}>
+                          <a data-tip='You are only seeing this page because you dont have a team
+                             yet
+                             This simple page is designed to streamline the process of
+                             getting a team together
+                             we can programmatically require signing
+                             https://github.com/leelakrishnan/FlyTV/issues/58
+                             before joining a team'>Help</a>
+                          <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+                        </div>
+
+
+                        <div className={styles.teamGroups}>
+                          <select value={value} onChange={handleTeamCreateChange}>
+                            <option value="1">I am looking for a team to join</option>
+                            <option value="2">
+                              I am hacking alone want to create a team
+                            </option>
+                            <option value="3">
+                              I have my own team members want to create a team
+                            </option>
+                          </select>
+                          <button
+                              className={styles.join}
+                              onClick={(e) => {
+                                createOrApplyTeam(e);
+                              }}
+                          >
+                            Create/Apply Team
+                          </button>
+                        </div>
+                        {teamsLooking.length > 0 && (
+                            <div className={styles.teamGroups}>
+                              <>
+                                <div className={styles.allTribes}>
+                                  <MaterialTable
+                                      title="Team members"
+                                      columns={columns}
+                                      data={teamsLooking}
+                                      actions={[
+                                        {
+                                          icon: "Send Invite",
+                                          tooltip: "Send Invite",
+                                          onClick: (event, rowData) => {
+                                            console.dir(rowData);
+                                            sendInvite(event, rowData);
+                                          },
+                                        },
+                                        {
+                                          icon: "CheckTeam",
+                                          tooltip: "CheckTeam",
+                                          onClick: (event, rowData) => {
+                                            console.dir(rowData);
+                                            checkTeam(event, rowData);
+                                          },
+                                        },
+                                      ]}
+                                  />
+                                </div>
+                              </>
+                            </div>
+                        )}
+                      </>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
-    </>
+        </main>
+      </>
   );
 };
 export default Team;
