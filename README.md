@@ -1,4 +1,4 @@
-# FlyTV
+# FLYTV
 
 > Fly Team Vote
 > 🛗 Team ✅ Vote ✌🏽 Fly 🚀
