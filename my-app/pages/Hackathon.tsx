@@ -1,28 +1,16 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { SetStateAction, useEffect, useState } from "react";
+import {  useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Nav from "../components/Nav";
-import { toast } from "react-toastify";
 import { useMoralis } from "react-moralis";
-import Moralis from "moralis";
-import Loader from "../components/Loader";
-import MaterialTable from "material-table";
 import ReactTooltip from "react-tooltip";
 
 const Team: NextPage = () => {
   const router = useRouter();
-  const [selectedOption, setSelectedOption] = useState("");
-  const { user, setUserData, userError, isUserUpdating, refetchUserData } =
+  const { user} =
     useMoralis();
-  const [teamId, setTeamId] = useState("");
-  const [loading, setLoading] = useState("not-loaded");
-  const [teamData, setTeamData] = useState({});
-  const [teamLoaded, setTeamLoaded] = useState("not-loaded");
-  const [value, setValue] = useState("1");
-  const [teamsLooking, setTeamsLooking] = useState([]);
-  const [allTeamData, setAllTeamData] = useState({});
 
   useEffect(() => {}, [user]);
 

@@ -212,7 +212,7 @@ const Team: NextPage = () => {
 
   function checkTeam(event: any, rowData: any) {
     event.preventDefault();
-    router.push("http://localhost:3000/MyTeam?teamQueryId=" + rowData.teamId);
+    router.push("/MyTeam?teamQueryId=" + rowData.teamId);
   }
 
   // @ts-ignore

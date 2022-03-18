@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import styles from "../styles/Form.module.css";
-import { useRouter } from "next/router";
 import { IconButton } from "@mui/material";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import FormHelperText from "@mui/material/FormHelperText";
-import Link from "next/link";
 import {
   useMoralis,
   useMoralisFile,
-  useWeb3ExecuteFunction,
 } from "react-moralis";
 import Moralis from "moralis";
 import ReactTooltip from "react-tooltip";
@@ -18,16 +14,15 @@ type Props = {
 };
 
 const TeamVideoDrive = ({ teamData }: Props) => {
-  const router = useRouter();
-  const { saveFile, isUploading } = useMoralisFile();
+  const { saveFile } = useMoralisFile();
 
-  const [formValues, setFormValues] = useState({
+  const [formValues] = useState({
     content: {},
     videoLinks: [],
   });
-  const [formErrors, setFormErrors] = useState({});
+  const [ setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const { user, setUserData, userError, isUserUpdating, refetchUserData } =
+  const { user } =
     useMoralis();
   const [loader, setLoader] = useState("not-loaded");
 
@@ -36,11 +31,6 @@ const TeamVideoDrive = ({ teamData }: Props) => {
     setLoader("loaded");
   }, [user]);
 
-  const formErrorStyle = {
-    color: "red",
-    fontSize: "1.2rem",
-    paddingBottom: "0.5rem",
-  };
   //is this where I could add in a "text description"?
   function mapMoralisTeamToFormValues() {
     const videoLinks = teamData?.get("videoLinks");
@@ -161,7 +151,7 @@ const TeamVideoDrive = ({ teamData }: Props) => {
                     formValues.videoLinks &&
                     formValues.videoLinks.length > 0 &&
                     formValues.videoLinks.map((ipfsUrl, index) => (
-                      <div className={styles.formGroups}>
+                      <div key={index} className={styles.formGroups}>
                         <label htmlFor="name">{ipfsUrl}</label>
                       </div>
                     ))}

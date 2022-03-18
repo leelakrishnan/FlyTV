@@ -45,7 +45,7 @@ const TeamProjectManagement = ({ teamData }: Props) => {
   };
 
   const validateError = () => {
-    const errors = {};
+    const errors = {projectManagementUrl : ''};
     if (formValues.projectManagementUrl === "") {
       errors.projectManagementUrl = "Project Management Url is required";
     }
@@ -62,7 +62,7 @@ const TeamProjectManagement = ({ teamData }: Props) => {
     }
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("HERE");
 
