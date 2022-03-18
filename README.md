@@ -1,6 +1,17 @@
 # FlyTV
 
-> Team Vote (Mates ? Machine)
+> Fly Team Vote
+> 🛗 Team ✅ Vote ✌🏽 Fly 🚀
+
+important folders:
+
+1. readme/ //-collected documentation
+2. my-app/ //the main application, remember to cd here to npm install etc
+3. smart-contracts/ //this is where the tokens and DAO structure live and why Leela is losing sleep
+4. my-app/public/screenshots/ //assorted screenshots that may have clues to the "wingbird0-world"
+5. badgeRewards/ //this is one of tippi's ideas, to have a ceremony awarding different badgers to people for their individual contribution to the project, in a way, verifying some of their skills like a recommendation letter.
+6. web3storage-quickstart/ //a team can use this to send or save their project information for submission as a final project. while creating the branch, tippi lost one point in professionalism, but learned a lesson.
+7. arch-sketch.md //as per recommendations from meeting with mentor, we thought about the different archetypes of users ...
 
 ## How to run on your local machine:
 
