@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {useMoralis} from "react-moralis";
 import { toast } from 'react-toastify';
 import styles from "../styles/Form.module.css";
 import { useRouter } from 'next/router'
 import Moralis from "moralis";
+import ReactTooltip from "react-tooltip";
 
 type Props = {
     teamData: any,
@@ -62,6 +63,12 @@ const TeamFun = ({ teamData }: Props)  => {
 
     return (
         <>
+            <div className={styles.pagetooltip}>
+                <a data-tip='Hackathons can be stressful. Create random memes with your team at the beginning of a meeting to warm up!
+Create and propose ideas for your collaboration. Use this DOA to make have more transparent decision making and accountability,
+ by having team mates vote on any project suggestions'>Help</a>
+                <ReactTooltip className='extraClass' delayHide={1000} effect='solid'/>
+            </div>
             <div className={styles.container}>
                     <form className={styles.form}>
                         <div className={styles.formGroups}>

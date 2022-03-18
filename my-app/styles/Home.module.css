@@ -29,6 +29,7 @@
   color: var(--color-theme-white);
   width: 12.5rem;
   height: 2.5rem;
+  border-radius: 50px;
   background-color: blue;
   margin-left: 1.5rem;
 }
@@ -50,9 +51,11 @@
   font-size: 0.7rem;
   color: var(--color-theme-white);
   width: 12.5rem;
+  border-radius: 50px;
   height: 2.2rem;
   background-color: blue;
   margin-left: 1.5rem;
+  border-radius: 50px;
 }
 
 .logout:hover span {
@@ -61,6 +64,7 @@
 
 .logout:hover:before {
   content: "Logout" !important;
+  
 }
 
 .logout:hover {
@@ -75,6 +79,7 @@
   color: var(--color-theme-white);
   width: 12.5rem;
   height: 2.2rem;
+  border-radius: 50px;
   background-color: blue;
   margin-left: 1.5rem;
 }
@@ -100,7 +105,27 @@
   letter-spacing: 0.5rem;
   font-size: 2.5rem;
 }
-
+.teamjoin {
+  font-family: "Press Start 2P";
+  cursor: pointer;
+  padding: 10px 8px;
+  padding-top: 15px;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--color-theme-white);
+  /* width: 12.5rem;
+  height: 2.2rem; */
+  background: rgb(180, 58, 58);
+  background: linear-gradient(
+          0deg,
+          rgba(253, 29, 29, 100) 70%,
+          rgba(180, 58, 58, 100) 85%,
+          rgba(255, 255, 255, 100) 100%
+  );
+  min-height: 5em;
+  margin: 0 1em 0 1em;
+}
 .join {
   font-family: "Press Start 2P";
   cursor: pointer;
@@ -128,7 +153,7 @@
   font-family: "Inconsolata", monospace;
   text-transform: none;
   letter-spacing: 2px;
-  width: 60%;
+  width: 70%;
   text-align: center;
 }
 
@@ -531,8 +556,12 @@
   100% {
     opacity: 0;
   }
-  0% {opacity: 1;}
-  100% {opacity: 0;} 
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
@@ -542,10 +571,8 @@
   color: red !important;
 }
 .rmsc.dropdown-container {
-  background-color: black !important;;
+  background-color: black !important;
 }
-
-
 
 .meme {
   position: relative;
@@ -569,16 +596,9 @@
   text-transform: uppercase;
   color: white;
   letter-spacing: 1px;
-  text-shadow:
-          2px 2px 0 #000,
-          -2px -2px 0 #000,
-          2px -2px 0 #000,
-          -2px 2px 0 #000,
-          0 2px 0 #000,
-          2px 0 0 #000,
-          0 -2px 0 #000,
-          -2px 0 0 #000,
-          2px 2px 5px #000;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000,
+    -2px 2px 0 #000, 0 2px 0 #000, 2px 0 0 #000, 0 -2px 0 #000, -2px 0 0 #000,
+    2px 2px 5px #000;
 }
 
 .bottom {
@@ -589,14 +609,12 @@
   top: 0;
 }
 
-
 .MuiButtonBase-root {
   padding: 12px 16px !important;
-  padding-top: 12px  !important;
-  padding-right: 16px  !important;
-  padding-bottom: 12px  !important;
-  padding-left: 16px  !important;
-
+  padding-top: 12px !important;
+  padding-right: 16px !important;
+  padding-bottom: 12px !important;
+  padding-left: 16px !important;
 }
 
 .MuiIconButton-label {
@@ -608,4 +626,14 @@
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+}
+
+
+.pagetooltip {
+  position:fixed;bottom:2em;right:1em;
+}
+
+.teamFlex{
+  flex-direction: column !important;
+  display: flex !important;
 }
