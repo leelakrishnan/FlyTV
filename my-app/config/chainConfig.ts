@@ -26,7 +26,7 @@ export const CHAIN_CONFIG = {
     rpcTarget:
         "https://rinkeby.infura.io/v3/7c0e52f11cb8492c94804f28d8a0ee7f",
     blockExplorer: "https://rinkeby.etherscan.io",
-    chainId: "4",
+    chainId: "0x4",
     displayName: "Rinkeby Testnet",
     ticker: "ETH",
     tickerName: "ETH",
