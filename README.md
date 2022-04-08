@@ -1,8 +1,9 @@
 # FLYTV
 
-> Fly Team Vote
-> 🛗 Team ✅ Vote ✌🏽 Fly 🚀
+## > [Fly Team Vote: Flight V Devpost](https://devpost.com/software/to-be-defind)
+## > 🛗 Team ✅ Vote ✌🏽 Fly 🚀
 ![Team Logo](https://ipfs.io/ipfs/bafybeialdd56nwoyeezwihp3r4bo75krmijfqikbgql27s56bsmbxspb6q)
+[Fly Team Vote: Flight V Devpost](https://devpost.com/software/to-be-defind)
 
 > lots of metadata, scroll down to **how to run on your local machine for steps**
 
